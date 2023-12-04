@@ -6,7 +6,6 @@
   font-kerning: normal;
 }
 .profile__info {
-  height: 77px;
   max-width: 415px;
   margin-left: 30px;
   align-self: center;
@@ -22,6 +21,7 @@
   color: white;
   margin: 0 0 16px 0;
   font-family: "Inter 500", Arial, Helvetica, sans-serif;
+  font-weight: 500;
   font-size: 42px;
   line-height: 1.1;
   text-overflow: ellipsis;
@@ -32,13 +32,14 @@
   color: white;
   margin: 0;
   font-family: "Inter 400", Arial, Helvetica, sans-serif;
+  font-weight: 400;
   font-size: 18px;
   line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
-.profile__image-arrow {
+.profile__arrow {
   width: 10px;
   height: 10px;
   border: 1px solid white;
@@ -46,20 +47,82 @@
   justify-self: end;
   margin-top: 15px;
   box-sizing: content-box;
+  background-image: url(/images/icons/arrow.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-.profile__image-arrow:hover {
+.profile__arrow:hover {
   border-color: rgba(84, 84, 84, 1);
 }
-.profile__image_add-button {
-  padding: 14px 64px;
-  width: 22px;
-  height: 22px;
+.profile__add-button {
+  width: 150px;
+  height: 50px;
   border: 2px solid white;
   position: absolute;
   justify-self: end;
   align-self: center;
+  background-image: url(/images/icons/Add-Button.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.profile__image_add-button:hover {
+.profile__add-button:hover {
   border-color: rgba(84, 84, 84, 1);
+}
+
+@media screen and (max-width: 770px) {
+  .profile__title {
+    font-size: 32px;
+    line-height: 1.1;
+  }
+  .profile__subheading {
+    font-size: 16px;
+    line-height: 1.2;
+  }
+  .profile__arrow {
+    justify-self: flex-start;
+    margin: 11px 0 0 15px;
+    padding: 4px;
+  }
+  .profile__add-button {
+    width: 75px;
+  }
+}
+@media screen and (max-width: 620px) {
+  .profile {
+    margin-top: 42px;
+    max-width: 282px;
+    height: 286px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 50px 50px;
+  }
+  .profile__info {
+    max-width: 282px;
+    height: 50px;
+    margin: 0;
+    margin-bottom: 86px;
+  }
+  .profile__title {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .profile__subheading {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .profile__arrow {
+    padding: 4px;
+    margin: 2px 0 0 10px;
+  }
+  .profile__add-button {
+    align-self: end;
+    justify-self: center;
+    width: 16px;
+    height: 16px;
+    padding: 17px 133px;
+  }
 }

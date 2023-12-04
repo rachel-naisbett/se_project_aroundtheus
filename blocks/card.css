@@ -1,4 +1,6 @@
 .card__wrapper {
+  padding: 0;
+  list-style-type: none;
   max-width: 880px;
   margin-top: 45px;
   display: flex;
@@ -22,26 +24,41 @@
   margin: auto;
   background-color: white;
   width: 282px;
-  height: 79px;
+  padding: 25px 30px 25px 20px;
   border-radius: 0 0 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+.card__title {
+  color: black;
   font-family: "Inter 900", Arial, sans-serif;
+  font-weight: 900;
   font-size: 24px;
   line-height: 1.2;
-  padding-left: 20px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0;
 }
 .card__icon {
   background-color: white;
-  position: absolute;
   display: flex;
-  align-self: flex-end;
-  margin: 313px 30px 30px 241px;
+  background-image: url(/images/icons/heart-icon.svg);
+  width: 21px;
+  height: 18px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
 }
 .card__icon:hover {
-  fill-opacity: 60%;
+  color: rgba(84, 84, 84, 1);
+  /*I don't know how to change the color of the icon itself*/
+}
+@media screen and (max-width: 620px) {
+  .card__wrapper {
+    align-items: center;
+  }
 }
