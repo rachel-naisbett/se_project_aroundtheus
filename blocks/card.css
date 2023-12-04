@@ -1,4 +1,4 @@
-.card__wrapper {
+.card-wrapper {
   padding: 0;
   list-style-type: none;
   max-width: 880px;
@@ -58,7 +58,7 @@
   /*I don't know how to change the color of the icon itself*/
 }
 @media screen and (max-width: 620px) {
-  .card__wrapper {
+  .card-wrapper {
     align-items: center;
   }
 }
