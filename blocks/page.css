@@ -1,0 +1,8 @@
+.page {
+  background-color: black;
+  max-width: 880px;
+  margin: auto;
+  padding: 0 19px;
+  display: grid;
+  grid-template-columns: minmax(320px, 880px);
+}
