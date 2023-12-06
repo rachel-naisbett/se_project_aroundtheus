@@ -2,20 +2,17 @@
   background-color: black;
   max-width: 880px;
   margin: auto;
-  padding: 0 19px;
   display: grid;
   grid-template-columns: minmax(320px, 880px);
 }
-
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 700px) {
   .page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 28px 19px 36px 19px;
-    padding: 0;
+    margin: 28px 0 36px 0;
   }
-  .main {
+  .page__main {
     display: flex;
     flex-direction: column;
     align-items: center;

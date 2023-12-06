@@ -1,19 +1,18 @@
 .header {
   width: 100%;
   margin-top: 45px;
+  padding-bottom: 41px;
   max-width: 880px;
-  height: 74px;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgba(84, 84, 84, 1);
 }
 .header__icon {
   width: 173px;
   height: 33px;
 }
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 700px) {
   .header {
     margin: 0px;
-    max-width: 326px;
-    height: 56px;
+    padding: 0 0 32px 27px;
   }
   .header__icon {
     width: 126px;

@@ -2,7 +2,7 @@
   padding: 0;
   list-style-type: none;
   max-width: 880px;
-  margin-top: 45px;
+  margin: 45px 0 145px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -10,7 +10,6 @@
 }
 .card {
   max-width: 282px;
-  height: 361px;
   margin-bottom: 0;
   display: flex;
   flex-direction: column;
@@ -19,12 +18,13 @@
   border-radius: 10px 10px 0 0;
   width: 282px;
   height: 282px;
+  object-fit: cover;
 }
 .card__caption {
   margin: auto;
   background-color: white;
   width: 282px;
-  padding: 25px 30px 25px 20px;
+  padding: 25px 20px;
   border-radius: 0 0 10px 10px;
   display: flex;
   justify-content: space-between;
@@ -32,6 +32,7 @@
   box-sizing: border-box;
 }
 .card__title {
+  max-width: 219px;
   color: black;
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 900;
@@ -43,6 +44,7 @@
   margin: 0;
 }
 .card__icon {
+  cursor: url(../images/icons/pointer.png), pointer;
   background-color: white;
   display: flex;
   background-image: url(../images/icons/heart-icon.svg);
@@ -54,10 +56,10 @@
   border: none;
 }
 .card__icon:hover {
-  background-image: rgba(84, 84, 84, 0.6);
+  background-image: rgba(84, 84, 84, 0.5);
   /* I don't know how to make the icon's change upon hover, heellp! */
 }
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 700px) {
   .card-wrapper {
     align-items: center;
   }

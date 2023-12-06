@@ -4,18 +4,19 @@
   margin-bottom: 60px;
 }
 .footer__copyright {
+  margin: 0;
   color: rgba(84, 84, 84, 1);
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.2;
 }
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 700px) {
   .footer {
-    margin: 48px 0 0 0;
+    align-self: self-start;
+    margin-bottom: 36px;
   }
   .footer__copyright {
-    margin: 0;
     font-size: 14px;
   }
 }
