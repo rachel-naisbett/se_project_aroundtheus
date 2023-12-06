@@ -20,7 +20,7 @@
 .profile__title {
   color: white;
   margin: 0 0 16px 0;
-  font-family: "Inter 500", Arial, Helvetica, sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 42px;
   line-height: 1.1;
@@ -31,7 +31,7 @@
 .profile__subheading {
   color: white;
   margin: 0;
-  font-family: "Inter 400", Arial, Helvetica, sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.2;
@@ -47,13 +47,14 @@
   justify-self: end;
   margin-top: 15px;
   box-sizing: content-box;
-  background-image: url(/images/icons/arrow.svg);
+  background-image: url(../images/icons/arrow.svg);
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
 }
 .profile__arrow:hover {
-  border-color: rgba(84, 84, 84, 1);
+  background-image: rgba(84, 84, 84, 0.6);
+  border-color: rgba(84, 84, 84, 0.6);
 }
 .profile__add-button {
   width: 150px;
@@ -62,14 +63,15 @@
   position: absolute;
   justify-self: end;
   align-self: center;
-  background-image: url(/images/icons/Add-Button.svg);
+  background-image: url(../images/icons/Add-Button.svg);
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .profile__add-button:hover {
-  border-color: rgba(84, 84, 84, 1);
+  background-image: rgba(84, 84, 84, 0.6);
+  border-color: rgba(84, 84, 84, 0.6);
 }
 
 @media screen and (max-width: 770px) {
@@ -92,7 +94,6 @@
 }
 @media screen and (max-width: 620px) {
   .profile {
-    margin-top: 42px;
     max-width: 282px;
     height: 286px;
     display: grid;
@@ -102,9 +103,7 @@
   }
   .profile__info {
     max-width: 282px;
-    height: 50px;
-    margin: 0;
-    margin-bottom: 86px;
+    margin: 0 0 86px 0;
   }
   .profile__title {
     font-size: 22px;
@@ -117,12 +116,13 @@
   .profile__arrow {
     padding: 4px;
     margin: 2px 0 0 10px;
+    background-image: 7.5px 7.5px;
   }
   .profile__add-button {
     align-self: end;
     justify-self: center;
-    width: 16px;
-    height: 16px;
-    padding: 17px 133px;
+    background-image: 16px 16px;
+    box-sizing: border-box;
+    padding: 25px 141px;
   }
 }

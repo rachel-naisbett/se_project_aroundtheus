@@ -33,7 +33,7 @@
 }
 .card__title {
   color: black;
-  font-family: "Inter 900", Arial, sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 1.2;
@@ -45,7 +45,7 @@
 .card__icon {
   background-color: white;
   display: flex;
-  background-image: url(/images/icons/heart-icon.svg);
+  background-image: url(../images/icons/heart-icon.svg);
   width: 21px;
   height: 18px;
   background-color: transparent;
@@ -54,8 +54,8 @@
   border: none;
 }
 .card__icon:hover {
-  color: rgba(84, 84, 84, 1);
-  /*I don't know how to change the color of the icon itself*/
+  background-image: rgba(84, 84, 84, 0.6);
+  /* I don't know how to make the icon's change upon hover, heellp! */
 }
 @media screen and (max-width: 620px) {
   .card-wrapper {

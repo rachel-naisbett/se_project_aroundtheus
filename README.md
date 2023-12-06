@@ -25,4 +25,5 @@ Project Name: Around the US
 Project Functionality: This is a responsive design for devices with 320-1280px screen-width.
 Project Description: Designed for users to add or like travel pictures.
 Project Techniques: CSS and HTML based project.
-Github Project Link: https://github.com/rachel-naisbett/se_project_aroundtheus
+Github Project Link: https://rachel-naisbett.github.io/se_project_aroundtheus/
+Video Link: "I will upload video once project only has a few errors left" -Rachel

@@ -5,7 +5,7 @@
 }
 .footer__copyright {
   color: rgba(84, 84, 84, 1);
-  font-family: "Inter 400", Arial, sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.2;
@@ -17,6 +17,5 @@
   .footer__copyright {
     margin: 0;
     font-size: 14px;
-    line-height: 1.2;
   }
 }
