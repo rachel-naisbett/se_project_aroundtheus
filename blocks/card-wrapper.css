@@ -2,7 +2,7 @@
   padding: 0;
   list-style-type: none;
   max-width: 880px;
-  margin-top: 45px;
+  margin: 45px 0 67px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -11,5 +11,6 @@
 @media screen and (max-width: 700px) {
   .card-wrapper {
     align-items: center;
+    margin: 36px 0 48px 0;
   }
 }

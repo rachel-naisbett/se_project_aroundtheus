@@ -99,6 +99,9 @@
     grid-template-rows: auto auto auto;
   }
   .profile__info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     max-width: 282px;
     margin: 30px 0 36px 0;
   }
@@ -115,6 +118,7 @@
     background-size: 7.5px 7.5px;
     padding: 0;
     margin-top: 4px;
+    box-sizing: border-box;
   }
   .profile__add-button {
     width: 282px;
