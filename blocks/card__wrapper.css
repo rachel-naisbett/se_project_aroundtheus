@@ -1,0 +1,15 @@
+.card-wrapper {
+  padding: 0;
+  list-style-type: none;
+  max-width: 880px;
+  margin-top: 45px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+@media screen and (max-width: 700px) {
+  .card-wrapper {
+    align-items: center;
+  }
+}
