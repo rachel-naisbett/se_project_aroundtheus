@@ -8,7 +8,13 @@
   z-index: 999;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0 19px;
+  display: none;
 }
+
+.modal__opened {
+  display: flex;
+}
+
 .modal__container {
   position: relative;
   display: flex;
@@ -32,6 +38,11 @@
   background-size: contain;
   cursor: pointer;
 }
+
+.modal__close:hover {
+  opacity: 0.6;
+}
+
 .modal__heading {
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 900;
@@ -67,7 +78,7 @@
   border-radius: 2px;
   cursor: pointer;
 }
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 630px) {
   .modal__container {
     padding: 25px 20px;
   }
