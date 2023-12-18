@@ -19,11 +19,17 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: #fff;
   border-radius: 10px;
   margin: auto;
   padding: 36px;
   max-width: 430px;
+}
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .modal__close {
   top: -45px;
@@ -63,10 +69,9 @@
   padding-bottom: 13px;
 }
 .modal__input:last-child {
-  margin-bottom: 0;
+  margin-bottom: 48px;
 }
 .modal__button {
-  margin-top: 48px;
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 18px;
@@ -77,6 +82,7 @@
   border: none;
   border-radius: 2px;
   cursor: pointer;
+  width: 358px;
 }
 @media screen and (max-width: 630px) {
   .modal__container {

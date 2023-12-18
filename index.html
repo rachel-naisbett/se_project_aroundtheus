@@ -29,74 +29,7 @@
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
-        <ul class="card-wrapper">
-          <li class="card">
-            <img
-              src="./images/card-images/yosemite.jpg"
-              alt="yosemite"
-              class="card__image"
-            />
-            <div class="card__caption">
-              <h2 class="card__title">Yosemite Valley</h2>
-              <button class="card__icon" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img
-              src="./images/card-images/lake-louise.jpg"
-              alt="lake-louise"
-              class="card__image"
-            />
-            <div class="card__caption">
-              <h2 class="card__title">Lake Louise</h2>
-              <button class="card__icon" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img
-              src="./images/card-images/bald-mountains.jpg"
-              alt="bald-mountains"
-              class="card__image"
-            />
-            <div class="card__caption">
-              <h2 class="card__title">Bald Mountains</h2>
-              <button class="card__icon" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img
-              src="./images/card-images/latemar.jpg"
-              alt="latemar"
-              class="card__image"
-            />
-            <div class="card__caption">
-              <h2 class="card__title">Latemar</h2>
-              <button class="card__icon" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img
-              src="./images/card-images/vanoise.jpg"
-              alt="vanoise"
-              class="card__image"
-            />
-            <div class="card__caption">
-              <h2 class="card__title">Vanoise National Park</h2>
-              <button class="card__icon" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img
-              src="./images/card-images/lago.jpg"
-              alt="lago"
-              class="card__image"
-            />
-            <div class="card__caption">
-              <h2 class="card__title">Lago de Braies</h2>
-              <button class="card__icon" type="button"></button>
-            </div>
-          </li>
-        </ul>
+        <ul class="card-wrapper"></ul>
       </main>
       <footer class="footer">
         <p class="footer__copyright">&copy;Rachel Naisbett</p>
@@ -104,25 +37,36 @@
     </div>
     <div class="modal">
       <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <h3 class="modal__heading">Edit Profile</h3>
         <form class="modal__form">
-          <button class="modal__close"></button>
-          <p class="modal__heading">Edit Profile</p>
+          <input
+            class="modal__input"
+            id="modal__input-name"
+            type="text"
+            name="heading"
+            placeholder="Name"
+          />
+          <input
+            class="modal__input"
+            id="modal__input-description"
+            type="text"
+            name="subheading"
+            placeholder="Description"
+          />
+          <button class="modal__button" type="submit">Save</button>
         </form>
-        <input
-          class="modal__input"
-          type="text"
-          name="heading"
-          placeholder="Name"
-        />
-        <input
-          class="modal__input"
-          type="text"
-          name="subheading"
-          placeholder="Description"
-        />
-        <button class="modal__button">Save</button>
       </div>
     </div>
+    <template id="card-template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__caption">
+          <h2 class="card__title"></h2>
+          <button class="card__icon" type="button"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
