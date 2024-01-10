@@ -24,6 +24,44 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
+/* CARD MODAL*/
+const addCardButton = document.querySelector(".profile__add-button");
+const cardModal = document.querySelector(".card-modal");
+const cardTitle = document.querySelector(".card__title");
+const cardLink = document.querySelector(".card__image");
+const cardModalTitle = document.querySelector("#card-modal__input-title");
+const cardModalLink = document.querySelector("#card-modal__input-imagelink");
+const cardModalClose = document.querySelector(".card-modal__close");
+const cardModalSave = document.querySelector(".card-modal__button");
+const cardsWrap = document.querySelector(".card-wrapper");
+const cardModalForm = document.querySelector(".card-modal__form");
+
+addCardButton.addEventListener("click", () => {
+  cardModal.classList.add("card-modal_opened");
+});
+
+function closeCardModal(modal) {
+  cardModal.classList.remove("card-modal_opened");
+}
+
+cardModalClose.addEventListener("click", () => {
+  closeCardModal();
+});
+
+cardModalForm.addEventListener("submit", (e) => {
+  closeCardModal();
+  e.preventDefault();
+  const cardData = {
+    name: cardModalTitle.value,
+    link: cardModalLink.value,
+  };
+  cardsWrap.prepend(getCardElement(cardData));
+});
+
+/* CARD IMAGE LIKE BUTTON*/
+
+/* PROJECT 4 CODE*/
 const profileEditButton = document.querySelector(".profile__arrow");
 const profileEditModal = document.querySelector(".modal");
 const profileName = document.querySelector(".profile__title");
@@ -71,7 +109,6 @@ profileEditForm.addEventListener("submit", (e) => {
   closePopup();
 });
 
-initialCards.forEach(function (cardData) {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
+initialCards.forEach((cardData) => {
+  cardsWrap.prepend(getCardElement(cardData));
 });
