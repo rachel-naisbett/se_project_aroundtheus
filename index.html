@@ -35,49 +35,65 @@
         <p class="footer__copyright">&copy;Rachel Naisbett</p>
       </footer>
     </div>
-    <div class="modal">
+    <div class="modal" id="profileModal">
       <div class="modal__container">
-        <button class="modal__close" type="button"></button>
+        <button
+          class="modal__close"
+          id="profile-modal__close"
+          type="button"
+        ></button>
         <h3 class="modal__heading">Edit Profile</h3>
         <form class="modal__form">
           <input
             class="modal__input"
-            id="modal__input-name"
+            id="profileModal__input-name"
             type="text"
             name="heading"
             placeholder="Name"
+            required
           />
           <input
             class="modal__input"
-            id="modal__input-description"
+            id="profileModal__input-description"
             type="text"
             name="subheading"
             placeholder="Description"
+            required
           />
-          <button class="modal__button" type="submit">Save</button>
+          <button class="modal__button" id="profileModal__button" type="submit">
+            Save
+          </button>
         </form>
       </div>
     </div>
-    <div class="card-modal">
-      <div class="card-modal__container">
-        <button class="card-modal__close" type="button"></button>
-        <h3 class="card-modal__heading">New Place</h3>
-        <form class="card-modal__form">
+    <div class="modal" id="cardModal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          id="card-modal__close"
+          type="button"
+        ></button>
+        <h3 class="modal__heading">New Place</h3>
+        <form class="modal__form">
           <input
-            class="card-modal__input"
+            class="modal__input"
             id="card-modal__input-title"
             type="text"
             name="heading"
             placeholder="Title"
+            required
           />
           <input
-            class="card-modal__input"
+            class="modal__input"
             id="card-modal__input-imagelink"
-            type="text"
+            type="url"
             name="subheading"
             placeholder="Image link"
+            required
           />
-          <button class="card-modal__button" type="submit">Create</button>
+          <button class="modal__button" id="cardModal__button" type="submit">
+            Create
+          </button>
         </form>
       </div>
     </div>
