@@ -118,7 +118,6 @@ function getCardElement(cardData) {
 
   cardImageEl.addEventListener("click", () => {
     handleImageClick(cardData);
-    cardImageModal.classList.add("cardImage_modal-opened");
   });
 
   cardElement
@@ -129,7 +128,7 @@ function getCardElement(cardData) {
 }
 
 function handleImageClick(imageData) {
-  cardImageModal.classList.add("cardImage_modal-opened");
+  openModal(modal);
   cardModalImage.src = imageData.link;
   imageModaltext.textContent = imageData.name;
   cardModalImage.alt = imageData.alt;
@@ -156,5 +155,5 @@ cardImageCloseButton.addEventListener("click", () => {
 });
 
 function closeCardImageModal() {
-  cardImageModal.classList.remove("cardImage_modal-opened");
+  closeModal();
 }
