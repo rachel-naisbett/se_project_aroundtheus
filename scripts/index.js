@@ -93,7 +93,7 @@ cardModalForm.addEventListener("submit", (e) => {
     link: cardModalLink.value,
   };
   cardsWrap.prepend(getCardElement(cardData));
-  document.cardForm.reset();
+  cardModalForm.reset();
 });
 
 profileEditButton.addEventListener("click", () => {
