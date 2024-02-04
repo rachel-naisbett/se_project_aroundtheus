@@ -60,10 +60,12 @@ const imageModaltext = document.querySelector(".card__imageModal-text");
 // EVENT HANDLERS
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscClick);
 }
 
 function closeModal() {
   document.querySelector(".modal_opened").classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscClick);
 }
 
 addCardButton.addEventListener("click", () => {
@@ -154,3 +156,28 @@ const cardImageCloseButton = document.querySelector(
 cardImageCloseButton.addEventListener("click", () => {
   closeModal();
 });
+
+//CODE TO CLOSE MODALS BY OVERLAY AND EXIT BUTTON
+const cardModalOverlay = document.querySelector("#cardModal");
+const profileModalOverlay = document.querySelector("#profileModal");
+
+cardModalOverlay.addEventListener("click", (e) => {
+  closeModalOverlay(e);
+});
+
+profileModalOverlay.addEventListener("click", (e) => {
+  closeModalOverlay(e);
+});
+
+function closeModalOverlay(e) {
+  console.log(e.target);
+  if (e.target.classList.contains("modal")) {
+    document.querySelector(".modal_opened").classList.remove("modal_opened");
+  }
+}
+
+function handleEscClick(e) {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+}

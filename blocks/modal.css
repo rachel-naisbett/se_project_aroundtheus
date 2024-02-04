@@ -79,6 +79,15 @@
 .modal__input:last-child {
   margin-bottom: 48px;
 }
+
+.modal__input:valid {
+  border-bottom: 1px solid green;
+}
+
+.modal__input:invalid {
+  border-bottom: 1px solid red;
+}
+
 .modal__button {
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 400;
@@ -96,6 +105,28 @@
   cursor: pointer;
   opacity: 0.6;
 }
+
+.modal__button_disabled {
+  background-color: white;
+  opacity: 0.2;
+  border: 1px solid grey;
+  color: grey;
+  pointer-events: none;
+}
+
+.modal__input-error {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: red;
+}
+
+.modal__input-error_active {
+  visibility: visible;
+  opacity: 1;
+}
+
 @media screen and (max-width: 630px) {
   .modal__container {
     padding: 25px 20px;
