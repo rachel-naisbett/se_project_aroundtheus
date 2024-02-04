@@ -128,8 +128,14 @@
 }
 
 @media screen and (max-width: 630px) {
+  .modal {
+    max-width: 300px;
+  }
   .modal__container {
     padding: 25px 20px;
+  }
+  .modal__form {
+    width: 250px;
   }
   .modal__close {
     right: 0;

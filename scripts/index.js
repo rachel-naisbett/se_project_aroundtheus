@@ -160,12 +160,17 @@ cardImageCloseButton.addEventListener("click", () => {
 //CODE TO CLOSE MODALS BY OVERLAY AND EXIT BUTTON
 const cardModalOverlay = document.querySelector("#cardModal");
 const profileModalOverlay = document.querySelector("#profileModal");
+const imageModalOverlay = document.querySelector("#imageModal");
 
 cardModalOverlay.addEventListener("click", (e) => {
   closeModalOverlay(e);
 });
 
 profileModalOverlay.addEventListener("click", (e) => {
+  closeModalOverlay(e);
+});
+
+imageModalOverlay.addEventListener("click", (e) => {
   closeModalOverlay(e);
 });
 
