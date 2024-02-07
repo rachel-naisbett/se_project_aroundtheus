@@ -63,8 +63,8 @@ function openModal(modal) {
   document.addEventListener("keydown", handleEscClick);
 }
 
-function closeModal() {
-  document.querySelector(".modal_opened").classList.remove("modal_opened");
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscClick);
 }
 
@@ -73,18 +73,18 @@ addCardButton.addEventListener("click", () => {
 });
 
 cardModalClose.addEventListener("click", () => {
-  closeModal();
+  closeModal(cardModal);
 });
 
 profileModalClose.addEventListener("click", () => {
-  closeModal();
+  closeModal(profileModal);
 });
 
 profileModalForm.addEventListener("submit", (e) => {
   e.preventDefault();
   profileName.textContent = modalInputName.value;
   profileDescription.textContent = modalInputDescription.value;
-  closeModal();
+  closeModal(profileModal);
 });
 
 cardModalForm.addEventListener("submit", (e) => {
@@ -154,7 +154,7 @@ const cardImageCloseButton = document.querySelector(
 );
 
 cardImageCloseButton.addEventListener("click", () => {
-  closeModal();
+  closeModal(cardImageModal);
 });
 
 //CODE TO CLOSE MODALS BY OVERLAY AND EXIT BUTTON
@@ -174,15 +174,17 @@ imageModalOverlay.addEventListener("click", (e) => {
   closeModalOverlay(e);
 });
 
-function closeModalOverlay(e) {
-  console.log(e.target);
-  if (e.target.classList.contains("modal")) {
-    document.querySelector(".modal_opened").classList.remove("modal_opened");
+function handleEscClick(e) {
+  if (e.key === "Escape") {
+    closeModal(e.target);
   }
 }
 
-function handleEscClick(e) {
-  if (e.key === "Escape") {
-    closeModal();
+function closeModalOverlay(e) {
+  if (
+    e.target.classList.contains("modal") ||
+    e.target.classList.contains("modal_opened")
+  ) {
+    closeModal(e.target);
   }
 }
