@@ -176,7 +176,8 @@ imageModalOverlay.addEventListener("click", (e) => {
 
 function handleEscClick(e) {
   if (e.key === "Escape") {
-    closeModal(e.target);
+    const isModalOpen = document.querySelector(".modal_opened");
+    closeModal(isModalOpen);
   }
 }
 
