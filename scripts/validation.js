@@ -37,10 +37,11 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
 }
 
 function setEventListeners(formElement, config) {
-  const { inputSelector } = config;
+  const { inputSelector, submitButtonSelector } = config;
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
-  const submitButton = formElement.querySelector(".modal__button");
+  const submitButton = formElement.querySelector(submitButtonSelector);
 
+  toggleButtonState(inputElements, submitButton, config);
   inputElements.forEach((inputEl) => {
     inputEl.addEventListener("input", () => {
       checkInputValidity(formElement, inputEl, config);

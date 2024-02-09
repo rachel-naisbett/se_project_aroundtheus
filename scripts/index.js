@@ -26,6 +26,7 @@ const initialCards = [
 ];
 
 /* Variables*/
+const modal = document.querySelectorAll(".modal");
 const addCardButton = document.querySelector(".profile__add-button");
 const cardModal = document.querySelector("#cardModal");
 const cardTitle = document.querySelector(".card__title");
@@ -48,8 +49,8 @@ const modalInputDescription = document.querySelector(
 );
 
 const profileModalClose = document.querySelector("#profile-modal__close");
-const profileModalForm = document.querySelector("#profileModalForm");
-const cardModalForm = document.querySelector("#cardModalForm");
+const profileModalForm = document.forms["profileModalForm"];
+const cardModalForm = document.forms["cardModalForm"];
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardListEl = document.querySelector(".card-wrapper");
@@ -70,14 +71,6 @@ function closeModal(modal) {
 
 addCardButton.addEventListener("click", () => {
   openModal(cardModal);
-});
-
-cardModalClose.addEventListener("click", () => {
-  closeModal(cardModal);
-});
-
-profileModalClose.addEventListener("click", () => {
-  closeModal(profileModal);
 });
 
 profileModalForm.addEventListener("submit", (e) => {
@@ -153,39 +146,22 @@ const cardImageCloseButton = document.querySelector(
   ".cardImage__imageModalButton"
 );
 
-cardImageCloseButton.addEventListener("click", () => {
-  closeModal(cardImageModal);
-});
-
 //CODE TO CLOSE MODALS BY OVERLAY AND EXIT BUTTON
-const cardModalOverlay = document.querySelector("#cardModal");
-const profileModalOverlay = document.querySelector("#profileModal");
-const imageModalOverlay = document.querySelector("#imageModal");
-
-cardModalOverlay.addEventListener("click", (e) => {
-  closeModalOverlay(e);
-});
-
-profileModalOverlay.addEventListener("click", (e) => {
-  closeModalOverlay(e);
-});
-
-imageModalOverlay.addEventListener("click", (e) => {
-  closeModalOverlay(e);
-});
 
 function handleEscClick(e) {
   if (e.key === "Escape") {
-    const isModalOpen = document.querySelector(".modal_opened");
-    closeModal(isModalOpen);
+    const checkModalOpen = document.querySelector(".modal_opened");
+    closeModal(checkModalOpen);
   }
 }
 
-function closeModalOverlay(e) {
-  if (
-    e.target.classList.contains("modal") ||
-    e.target.classList.contains("modal_opened")
-  ) {
-    closeModal(e.target);
-  }
-}
+modal.forEach((modal) => {
+  modal.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("modal_opened")) {
+      closeModal(modal);
+    }
+    if (evt.target.classList.contains("modal__close")) {
+      closeModal(modal);
+    }
+  });
+});
