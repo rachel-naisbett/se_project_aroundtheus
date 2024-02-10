@@ -26,7 +26,7 @@ const initialCards = [
 ];
 
 /* Variables*/
-const modal = document.querySelectorAll(".modal");
+const modals = document.querySelectorAll(".modal");
 const addCardButton = document.querySelector(".profile__add-button");
 const cardModal = document.querySelector("#cardModal");
 const cardTitle = document.querySelector(".card__title");
@@ -36,7 +36,6 @@ const cardModalLink = document.querySelector("#card-modal__input-imagelink");
 const cardModalClose = document.querySelector("#card-modal__close");
 const cardModalSave = document.querySelector("#cardModal__button");
 const cardsWrap = document.querySelector(".card-wrapper");
-const likeButton = document.querySelectorAll(".card__icon");
 
 const profileEditButton = document.querySelector(".profile__arrow");
 const profileModal = document.querySelector("#profileModal");
@@ -150,12 +149,12 @@ const cardImageCloseButton = document.querySelector(
 
 function handleEscClick(e) {
   if (e.key === "Escape") {
-    const checkModalOpen = document.querySelector(".modal_opened");
-    closeModal(checkModalOpen);
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
   }
 }
 
-modal.forEach((modal) => {
+modals.forEach((modal) => {
   modal.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("modal_opened")) {
       closeModal(modal);
