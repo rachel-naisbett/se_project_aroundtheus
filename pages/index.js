@@ -1,3 +1,6 @@
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,6 +27,16 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
+// const cardData = initialCards.forEach((name, link) => {
+//   const name = cardTitle.value;
+//   const link = cardLink.value;
+// });
+
+const cardData = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
 
 /* Variables*/
 const modals = document.querySelectorAll(".modal");
@@ -98,45 +111,19 @@ profileEditButton.addEventListener("click", () => {
 
 // CREATE NEW CARD FUNCTION
 function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__icon");
-
-  cardTitleEl.textContent = cardData.name;
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.link;
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__icon-button_active");
-  });
-
-  cardImageEl.addEventListener("click", () => {
-    handleImageClick(cardData);
-  });
-
-  cardElement
-    .querySelector(".card__delete-button")
-    .addEventListener("click", () => deleteCard(cardElement));
-
-  return cardElement;
+  return new Card(cardData, "#card-template", handleImageClick).getView();
 }
 
 function handleImageClick(imageData) {
   openModal(cardImageModal);
-  cardModalImage.src = imageData.link;
-  imageModaltext.textContent = imageData.name;
-  cardModalImage.alt = imageData.alt;
+  cardModalImage.src = this._link;
+  imageModaltext.textContent = this._name;
+  cardModalImage.alt = this._cardImage.alt;
 }
 
 initialCards.forEach((cardData) => {
   cardsWrap.prepend(getCardElement(cardData));
 });
-
-// DELETE CARD FUNCTION
-function deleteCard(element) {
-  element.remove();
-}
 
 // CARD IMAGE MODAL
 const cardImageModal = document.querySelector(".cardImage__modal");
@@ -164,3 +151,83 @@ modals.forEach((modal) => {
     }
   });
 });
+
+//VALIDATION CODE
+
+// function checkInputValidity(formElement, inputEl, config) {
+//   if (!inputEl.validity.valid) {
+//     showInputError(formElement, inputEl, config);
+//   } else {
+//     hideInputError(formElement, inputEl, config);
+//   }
+// }
+
+// function showInputError(formElement, inputEl, { inputErrorClass, errorClass }) {
+//   const errorMessageEl = formElement.querySelector(`#${inputEl.id}-error`);
+//   inputEl.classList.add(inputErrorClass);
+//   errorMessageEl.textContent = inputEl.validationMessage;
+//   errorMessageEl.classList.add(errorClass);
+// }
+
+// function hideInputError(formElement, inputEl, { inputErrorClass, errorClass }) {
+//   const errorMessageEl = formElement.querySelector(`#${inputEl.id}-error`);
+//   inputEl.classList.remove(inputErrorClass);
+//   errorMessageEl.textContent = "";
+//   errorMessageEl.classList.remove(errorClass);
+// }
+
+// function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
+//   let foundInvalid = false;
+//   inputEls.forEach((inputEl) => {
+//     if (!inputEl.validity.valid) {
+//       foundInvalid = true;
+//     }
+//   });
+//   if (foundInvalid) {
+//     submitButton.classList.add(inactiveButtonClass);
+//     submitButton.disabled = true;
+//   } else {
+//     submitButton.classList.remove(inactiveButtonClass);
+//     submitButton.disabled = false;
+//   }
+// }
+
+// function setEventListeners(formElement, config) {
+//   const { inputSelector, submitButtonSelector } = config;
+//   const inputElements = [...formElement.querySelectorAll(inputSelector)];
+//   const submitButton = formElement.querySelector(submitButtonSelector);
+
+//   toggleButtonState(inputElements, submitButton, config);
+//   inputElements.forEach((inputEl) => {
+//     inputEl.addEventListener("input", () => {
+//       checkInputValidity(formElement, inputEl, config);
+//       toggleButtonState(inputElements, submitButton, config);
+//     });
+//   });
+// }
+
+// function enableValidation(config) {
+//   const formElements = [...document.querySelectorAll(config.formSelector)];
+//   formElements.forEach((formElement) => {
+//     formElement.addEventListener("submit", (e) => {
+//       e.preventDefault();
+//     });
+//     setEventListeners(formElement, config);
+//   });
+// }
+
+// enableValidation(config);
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: ".modal__button_disabled",
+  inputErrorClass: ".modal__input-error",
+  errorClass: ".modal__input-error_active",
+};
+
+const eElement = document.querySelector(".modal_form");
+
+const validate = new FormValidator(config);
+validate.enableValidation();
