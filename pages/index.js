@@ -232,3 +232,6 @@ const cardForm = document.forms["cardModalForm"];
 
 const editFormValidator = new FormValidator(editForm, config);
 editFormValidator.enableValidation();
+
+const cardFormValidator = new FormValidator(cardForm, config);
+cardFormValidator.enableValidation();

@@ -6,6 +6,8 @@ export default class FormValidator {
     this._errorClass = config.errorClass;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._formElement = formElement;
+    this._submitButton = document.querySelector(".modal__button");
+    this._inputElements = document.querySelectorAll(".modal__input");
   }
 
   //CHECK INPUT VALIDITY
@@ -27,9 +29,8 @@ export default class FormValidator {
 
   //EVENT LISTENERS
   _setEventListeners(formElement) {
-    this._inputElements = document.querySelectorAll(".modal__input");
     this._toggleButtonState(this._inputElements);
-    inputElements.forEach((inputElement) => {
+    this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
@@ -40,33 +41,29 @@ export default class FormValidator {
   //TOGGLE BUTTON
   _toggleButtonState(inputElements) {
     let foundInvalid = false;
-    inputElements.forEach((inputSelector) => {
+    this._inputElements.forEach((inputSelector) => {
       if (!inputSelector.validity.valid) {
         foundInvalid = true;
       }
     });
     if (foundInvalid) {
-      this._submitButtonSelector.classList.add("modal__button_disabled");
-      this._submitButtonSelector.disabled = true;
+      this._submitButton.classList.add("modal__button_disabled");
+      this._submitButton.disabled = true;
     } else {
-      this._submitButtonSelector.classList.remove("modal__button_disabled");
-      this._submitButtonSelector.disabled = false;
+      this._submitButton.classList.remove("modal__button_disabled");
+      this._submitButton.disabled = false;
     }
   }
   //SHOW ERROR MESSAGE
   _showInputError(inputElement, errorMessage) {
-    const errorMessageEl = this._formSelector.querySelector(
-      `#${inputElement.id}-error`
-    );
+    const errorMessageEl = this._formElement(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorMessageEl.textContent = errorMessage;
     errorMessageEl.classList.add(this._errorClass);
   }
   //HIDE ERROR MESSAGE
   _hideInputError(inputElement) {
-    const errorMessageEl = this._formSelector.querySelector(
-      `#${inputElement.id}-error`
-    );
+    const errorMessageEl = this._formElement(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorMessageEl.textContent = "";
     errorMessageEl.classList.remove(this._errorClass);
