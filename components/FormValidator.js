@@ -56,16 +56,20 @@ export default class FormValidator {
   }
   //SHOW ERROR MESSAGE
   _showInputError(inputElement, errorMessage) {
-    const errorMessageEl = this._formElement(`#${inputElement.id}-error`);
+    this._errorMessageEl = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
     inputElement.classList.add(this._inputErrorClass);
-    errorMessageEl.textContent = errorMessage;
-    errorMessageEl.classList.add(this._errorClass);
+    this._errorMessageEl.textContent = errorMessage;
+    this._errorMessageEl.classList.add(this._errorClass);
   }
   //HIDE ERROR MESSAGE
   _hideInputError(inputElement) {
-    const errorMessageEl = this._formElement(`#${inputElement.id}-error`);
+    this._errorMessageEl = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
     inputElement.classList.remove(this._inputErrorClass);
-    errorMessageEl.textContent = "";
-    errorMessageEl.classList.remove(this._errorClass);
+    this._errorMessageEl.textContent = "";
+    this._errorMessageEl.classList.remove(this._errorClass);
   }
 }
