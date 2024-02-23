@@ -1,12 +1,13 @@
 export default class FormValidator {
-  constructor(config, formElement) {
+  constructor(formElement, config) {
     this._inputSelector = config.inputSelector;
-    this._formSelector = config.formSelector;
     this._submitButtonSelector = config.submitButtonSelector;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._inactiveButtonClass = config.inactiveButtonClass;
+    this._formElement = formElement;
   }
+
   //CHECK INPUT VALIDITY
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
@@ -18,38 +19,37 @@ export default class FormValidator {
 
   //ENABLE VALIDATION
   enableValidation() {
-    this._formSelector.forEach(() => {
-      this._formSelector.addEventListener("submit", (e) => {
-        e.preventDefault();
-      });
-      this._setEventListeners();
+    this._formElement.addEventListener("submit", (e) => {
+      e.preventDefault();
     });
+    this._setEventListeners();
   }
 
   //EVENT LISTENERS
-  _setEventListeners() {
-    this._toggleButtonState();
-    this._inputSelector.forEach((inputElement) => {
+  _setEventListeners(formElement) {
+    this._inputElements = document.querySelectorAll(".modal__input");
+    this._toggleButtonState(this._inputElements);
+    inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        this._checkInputValidity();
+        this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });
     });
   }
 
   //TOGGLE BUTTON
-  _toggleButtonState(inputSelector) {
+  _toggleButtonState(inputElements) {
     let foundInvalid = false;
-    this._inputSelector.forEach((inputSelector) => {
+    inputElements.forEach((inputSelector) => {
       if (!inputSelector.validity.valid) {
         foundInvalid = true;
       }
     });
     if (foundInvalid) {
-      this._submitButtonSelector.classList.add(this._inactiveButtonClass);
+      this._submitButtonSelector.classList.add("modal__button_disabled");
       this._submitButtonSelector.disabled = true;
     } else {
-      this._submitButtonSelector.classList.remove(this._inactiveButtonClass);
+      this._submitButtonSelector.classList.remove("modal__button_disabled");
       this._submitButtonSelector.disabled = false;
     }
   }

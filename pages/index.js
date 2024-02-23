@@ -227,7 +227,8 @@ const config = {
   errorClass: ".modal__input-error_active",
 };
 
-const eElement = document.querySelector(".modal_form");
+const editForm = document.forms["profileModalForm"];
+const cardForm = document.forms["cardModalForm"];
 
-const validate = new FormValidator(config);
-validate.enableValidation();
+const editFormValidator = new FormValidator(editForm, config);
+editFormValidator.enableValidation();
