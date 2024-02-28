@@ -6,8 +6,8 @@ export default class FormValidator {
     this._errorClass = config.errorClass;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._formElement = formElement;
-    this._submitButton = document.querySelector(".modal__button");
-    this._inputElements = document.querySelectorAll(".modal__input");
+    this._submitButton = this._formElement.querySelector(".modal__button");
+    this._inputElements = this._formElement.querySelectorAll(".modal__input");
   }
 
   //CHECK INPUT VALIDITY
