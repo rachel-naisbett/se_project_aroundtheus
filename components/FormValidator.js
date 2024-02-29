@@ -38,14 +38,18 @@ export default class FormValidator {
     });
   }
 
-  //TOGGLE BUTTON
-  _toggleButtonState(inputElements) {
-    let foundInvalid = false;
-    this._inputElements.forEach((inputSelector) => {
+  _inputArray = () => {
+    this._inputElements.every((inputSelector) => {
       if (!inputSelector.validity.valid) {
         foundInvalid = true;
       }
     });
+  };
+
+  //TOGGLE BUTTON
+  _toggleButtonState(inputElements) {
+    let foundInvalid = false;
+    this._inputArray();
     if (foundInvalid) {
       this._submitButton.classList.add("modal__button_disabled");
       this._submitButton.disabled = true;

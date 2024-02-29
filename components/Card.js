@@ -20,9 +20,10 @@ export default class Card {
     });
   }
 
-  _deleteCard(e) {
-    e.target.closest(".card").remove();
-  }
+  _deleteCard = (e) => {
+    e.target.closest.this._cardElement.remove();
+    this._cardElement = null;
+  };
 
   getView() {
     this._cardElement = document
