@@ -84,7 +84,7 @@
   border-bottom: 1px solid green;
 }
 
-.modal__input:invalid {
+.modal_input-invalid {
   border-bottom: 1px solid red;
 }
 

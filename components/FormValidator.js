@@ -7,7 +7,9 @@ export default class FormValidator {
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._formElement = formElement;
     this._submitButton = this._formElement.querySelector(".modal__button");
-    this._inputElements = this._formElement.querySelectorAll(".modal__input");
+    this._inputElements = [
+      ...this._formElement.querySelectorAll(".modal__input"),
+    ];
   }
 
   //CHECK INPUT VALIDITY
@@ -38,7 +40,21 @@ export default class FormValidator {
     });
   }
 
+  //TOGGLE BUTTON
+  _toggleButtonState(inputElements) {
+    let foundInvalid = false;
+    this._inputArray();
+    if (foundInvalid) {
+      this._submitButton.classList.add.inactiveButtonClass;
+      this._submitButton.disabled = true;
+    } else {
+      this._submitButton.classList.remove.inactiveButtonClass;
+      this._submitButton.disabled = false;
+    }
+  }
+
   _inputArray = () => {
+    let foundInvalid = false;
     this._inputElements.every((inputSelector) => {
       if (!inputSelector.validity.valid) {
         foundInvalid = true;
@@ -46,18 +62,6 @@ export default class FormValidator {
     });
   };
 
-  //TOGGLE BUTTON
-  _toggleButtonState(inputElements) {
-    let foundInvalid = false;
-    this._inputArray();
-    if (foundInvalid) {
-      this._submitButton.classList.add("modal__button_disabled");
-      this._submitButton.disabled = true;
-    } else {
-      this._submitButton.classList.remove("modal__button_disabled");
-      this._submitButton.disabled = false;
-    }
-  }
   //SHOW ERROR MESSAGE
   _showInputError(inputElement, errorMessage) {
     this._errorMessageEl = this._formElement.querySelector(
@@ -66,6 +70,7 @@ export default class FormValidator {
     inputElement.classList.add(this._inputErrorClass);
     this._errorMessageEl.textContent = errorMessage;
     this._errorMessageEl.classList.add(this._errorClass);
+    this._errorMessageEl.classList.add(modal_input - invalid);
   }
   //HIDE ERROR MESSAGE
   _hideInputError(inputElement) {
@@ -75,5 +80,6 @@ export default class FormValidator {
     inputElement.classList.remove(this._inputErrorClass);
     this._errorMessageEl.textContent = "";
     this._errorMessageEl.classList.remove(this._errorClass);
+    this._errorMessageEl.classList.remove(modal_input - invalid);
   }
 }
