@@ -6,9 +6,11 @@ export default class FormValidator {
     this._errorClass = config.errorClass;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._formElement = formElement;
-    this._submitButton = this._formElement.querySelector(".modal__button");
+    this._submitButton = this._formElement.querySelector(
+      this._submitButtonSelector
+    );
     this._inputElements = [
-      ...this._formElement.querySelectorAll(".modal__input"),
+      ...this._formElement.querySelectorAll(this._inputSelector),
     ];
   }
 
@@ -31,7 +33,7 @@ export default class FormValidator {
 
   //EVENT LISTENERS
   _setEventListeners(formElement) {
-    this._toggleButtonState(this._inputElements);
+    this._toggleButtonState();
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
@@ -41,26 +43,21 @@ export default class FormValidator {
   }
 
   //TOGGLE BUTTON
-  _toggleButtonState(inputElements) {
-    let foundInvalid = false;
-    this._inputArray();
-    if (foundInvalid) {
-      this._submitButton.classList.add.inactiveButtonClass;
+  _toggleButtonState() {
+    if (this._checkFormValidity()) {
+      this._submitButton.classList.add(this._inactiveButtonClass);
       this._submitButton.disabled = true;
     } else {
-      this._submitButton.classList.remove.inactiveButtonClass;
+      this._submitButton.classList.remove(this._inactiveButtonClass);
       this._submitButton.disabled = false;
     }
   }
 
-  _inputArray = () => {
-    let foundInvalid = false;
-    this._inputElements.every((inputSelector) => {
-      if (!inputSelector.validity.valid) {
-        foundInvalid = true;
-      }
+  _checkFormValidity() {
+    return this._inputElements.some((inputElement) => {
+      return !inputElement.validity.valid;
     });
-  };
+  }
 
   //SHOW ERROR MESSAGE
   _showInputError(inputElement, errorMessage) {
@@ -70,7 +67,6 @@ export default class FormValidator {
     inputElement.classList.add(this._inputErrorClass);
     this._errorMessageEl.textContent = errorMessage;
     this._errorMessageEl.classList.add(this._errorClass);
-    this._errorMessageEl.classList.add(modal_input - invalid);
   }
   //HIDE ERROR MESSAGE
   _hideInputError(inputElement) {
@@ -80,6 +76,5 @@ export default class FormValidator {
     inputElement.classList.remove(this._inputErrorClass);
     this._errorMessageEl.textContent = "";
     this._errorMessageEl.classList.remove(this._errorClass);
-    this._errorMessageEl.classList.remove(modal_input - invalid);
   }
 }

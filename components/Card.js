@@ -5,15 +5,22 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
   }
+
+  //DECONSTRUCTING SETEVENTLISTENERS
+  _toggleLike = () => {
+    this._likeButton.classList.toggle("card__icon-button_active");
+  };
+
+  _removeCard = () => {
+    this._deleteCard();
+  };
+
   _setEventListeners() {
     //LIKE BUTTON
-    this._likeButton.addEventListener("click", () => {
-      this._likeButton.classList.toggle("card__icon-button_active");
-    });
+    this._likeButton.addEventListener("click", this._toggleLike);
+
     //DELETE BUTTON
-    this._deleteButton.addEventListener("click", (event) => {
-      this._deleteCard(event);
-    });
+    this._deleteButton.addEventListener("click", this._removeCard);
     //IMAGE BUTTON
     this._cardImage.addEventListener("click", () => {
       this._handleImageClick();
@@ -21,7 +28,7 @@ export default class Card {
   }
 
   _deleteCard = (e) => {
-    e.target.closest.this._cardElement.remove();
+    this._cardElement.remove();
     this._cardElement = null;
   };
 
