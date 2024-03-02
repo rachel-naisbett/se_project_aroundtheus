@@ -159,6 +159,7 @@ const config = {
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: ".modal__input-error",
   errorClass: ".modal__input-error_active",
+  invalidInputClass: "modal__input-invalid",
 };
 
 const editForm = document.forms["profileModalForm"];

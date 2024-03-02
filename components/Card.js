@@ -11,16 +11,12 @@ export default class Card {
     this._likeButton.classList.toggle("card__icon-button_active");
   };
 
-  _removeCard = () => {
-    this._deleteCard();
-  };
-
   _setEventListeners() {
     //LIKE BUTTON
     this._likeButton.addEventListener("click", this._toggleLike);
 
     //DELETE BUTTON
-    this._deleteButton.addEventListener("click", this._removeCard);
+    this._deleteButton.addEventListener("click", this._deleteCard);
     //IMAGE BUTTON
     this._cardImage.addEventListener("click", () => {
       this._handleImageClick();

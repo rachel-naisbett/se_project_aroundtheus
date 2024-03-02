@@ -1,5 +1,6 @@
 export default class FormValidator {
   constructor(formElement, config) {
+    this._invalidInputClass = config.invalidInputClass;
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
     this._inputErrorClass = config.inputErrorClass;
@@ -67,6 +68,7 @@ export default class FormValidator {
     inputElement.classList.add(this._inputErrorClass);
     this._errorMessageEl.textContent = errorMessage;
     this._errorMessageEl.classList.add(this._errorClass);
+    inputElement.classList.add(this._invalidInputClass);
   }
   //HIDE ERROR MESSAGE
   _hideInputError(inputElement) {
@@ -76,5 +78,6 @@ export default class FormValidator {
     inputElement.classList.remove(this._inputErrorClass);
     this._errorMessageEl.textContent = "";
     this._errorMessageEl.classList.remove(this._errorClass);
+    inputElement.classList.remove(this._invalidInputClass);
   }
 }
