@@ -31,57 +31,27 @@ const initialCards = [
   },
 ];
 
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
-
-/* Variables*/
-const modals = document.querySelectorAll(".modal");
-const addCardButton = document.querySelector(".profile__add-button");
-const cardModal = document.querySelector("#cardModal");
-const cardTitle = document.querySelector(".card__title");
-const cardLink = document.querySelector(".card__image");
+const cardModalImage = document.querySelector(".cardImage__modal-image");
+const imageModaltext = document.querySelector(".card__imageModal-text");
 const cardModalTitle = document.querySelector("#card-modal__input-title");
 const cardModalLink = document.querySelector("#card-modal__input-imagelink");
-const cardModalClose = document.querySelector("#card-modal__close");
-const cardModalSave = document.querySelector("#cardModal__button");
-const cardsWrap = document.querySelector(".card-wrapper");
-
+const addCardButton = document.querySelector("#cardModal__button");
 const profileEditButton = document.querySelector(".profile__arrow");
-const profileModal = document.querySelector("#profileModal");
-const profileName = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__subheading");
-
-const modalInputName = document.querySelector("#profileModal__input-name");
-const modalInputDescription = document.querySelector(
-  "#profileModal__input-description"
-);
-
-const profileModalClose = document.querySelector("#profile-modal__close");
-const profileModalForm = document.forms["profileModalForm"];
-const cardModalForm = document.forms["cardModalForm"];
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
-const cardListEl = document.querySelector(".card-wrapper");
-
-// const cardModalImage = document.querySelector(".cardImage__modal-image");
-// const imageModaltext = document.querySelector(".card__imageModal-text");
 
 // EVENT HANDLERS
-// function openModal(modal) {
-//   modal.classList.add("modal_opened");
-//   document.addEventListener("keydown", handleEscClick);
-// }
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscClick);
+}
 
-// function closeModal(modal) {
-//   modal.classList.remove("modal_opened");
-//   document.removeEventListener("keydown", handleEscClick);
-// }
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscClick);
+}
 
-// addCardButton.addEventListener("click", () => {
-//   openModal(cardModal);
-// });
+addCardButton.addEventListener("click", () => {
+  openModal(cardModal);
+});
 
 // profileModalForm.addEventListener("submit", (e) => {
 //   e.preventDefault();
@@ -101,16 +71,16 @@ const cardListEl = document.querySelector(".card-wrapper");
 //   cardModalForm.reset();
 // });
 
-// profileEditButton.addEventListener("click", () => {
-//   modalInputName.value = profileName.textContent;
-//   modalInputDescription.value = profileDescription.textContent;
-//   openModal(profileModal);
-// });
+profileEditButton.addEventListener("click", () => {
+  modalInputName.value = profileName.textContent;
+  modalInputDescription.value = profileDescription.textContent;
+  openModal(profileModal);
+});
 
-// CREATE NEW CARD FUNCTION
-function getCardElement(cardData) {
-  return new Card(cardData, "#card-template", handleImageClick).getView();
-}
+// // CREATE NEW CARD FUNCTION
+// function getCardElement(cardData) {
+//   return new Card(cardData, "#card-template", handleImageClick).getView();
+// }
 
 function handleImageClick(imageData) {
   openModal(cardImageModal);
@@ -124,7 +94,7 @@ function handleImageClick(imageData) {
 // });
 
 // CARD IMAGE MODAL
-// const cardImageModal = document.querySelector(".cardImage__modal");
+const cardImageModal = document.querySelector(".cardImage__modal");
 
 // const cardImageCloseButton = document.querySelector(
 //   ".cardImage__imageModalButton"
@@ -132,12 +102,12 @@ function handleImageClick(imageData) {
 
 //CODE TO CLOSE MODALS BY OVERLAY AND EXIT BUTTON
 
-// function handleEscClick(e) {
-//   if (e.key === "Escape") {
-//     const openedModal = document.querySelector(".modal_opened");
-//     closeModal(openedModal);
-//   }
-// }
+function handleEscClick(e) {
+  if (e.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
+  }
+}
 
 // modals.forEach((modal) => {
 //   modal.addEventListener("mousedown", (evt) => {
@@ -150,6 +120,7 @@ function handleImageClick(imageData) {
 //   });
 // });
 
+//FORM VALIDATOR OBJECT
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
@@ -160,49 +131,27 @@ const config = {
   invalidInputClass: "modal__input-invalid",
 };
 
-// const editForm = document.forms["profileModalForm"];
-// const cardForm = document.forms["cardModalForm"];
+const editForm = document.forms["profileModalForm"];
+const cardForm = document.forms["cardModalForm"];
 
-// const editFormValidator = new FormValidator(editForm, config);
-// editFormValidator.enableValidation();
+const editFormValidator = new FormValidator(editForm, config);
+editFormValidator.enableValidation();
 
-// const cardFormValidator = new FormValidator(cardForm, config);
-// cardFormValidator.enableValidation();
-
-// //SPRINT-EIGHT
-// class Section {
-//   constructor(newCard) {}
-
-//   renderItems() {
-//     initialCards.forEach((cardData) => {});
-//   }
-
-//   renderer(){
-//     cardsWrap.prepend(getCardElement(cardData));
-//   }
-
-//   addItem(
-//     getCardElement(cardData) {
-//       return new Card(cardData, "#card-template", handleImageClick).getView();
-//     }
-//   );
-// }
-// }
-
-// const newCard{
-//   items: array,
-//   renderer: function
-// }
+const cardFormValidator = new FormValidator(cardForm, config);
+cardFormValidator.enableValidation();
 
 // //CREATE NEW INSTANCE
-// const newProfilePopup = new PopupWithForm("#profileModal", handleFormSubmit);
-// const newCardPopup = new PopupWithForm("#cardModal", handleFormSubmit);
-// const newImagePopup = new PopupWithImage("#imageModal");
+const newProfilePopup = new PopupWithForm("#profileModal", handleFormSubmit);
+const newCardPopup = new PopupWithForm("#cardModal", handleFormSubmit);
+const newImagePopup = new PopupWithImage("#imageModal");
 
-// this._handleFormSubmit = () => {
-//   this._profileName.textContent = this._modalInputName.value;
-//   this._profileDescription.textContent = this._modalInputDescription.value;
-// };
+newCardPopup.handleFormSubmit();
+newProfilePopup.handleFormSubmit();
+
+handleFormSubmit = () => {
+  profileName.textContent = modalInputName.value;
+  this._profileDescription.textContent = this._modalInputDescription.value;
+};
 
 // this._popupForm.addEventListener("submit", (e) => {
 //   this.close();
@@ -215,28 +164,23 @@ const config = {
 //   cardModalForm.reset();
 // });
 
-// const newCardData = {
-//   name: cardModalTitle.value,
-//   link: cardModalLink.value,
-// };
+//OBJECT FOR NEW CARDS
 
-// initialCards.forEach((item) => {
-//   const card = new Card(item, "#card-template", handleImageClick());
-//   console.log(card);
-//   const cardView = card.getView();
-//   console.log(cardView);
-//   section.renderer(cardView);
-// });
+const newCardData = {
+  name: cardModalTitle.value,
+  link: cardModalLink.value,
+};
+
+//SECTION OBJECT
+const sectionObject = {
+  items: initialCards,
+  renderer: () => {
+    const card = new Card(newCardData, "#card-template", handleImageClick());
+    const cardView = card.getView();
+    section.addItem(cardView);
+  },
+};
 
 const cardWrapper = document.querySelector(".card-wrapper");
 const section = new Section(sectionObject, cardWrapper);
-
-//OBJECT FOR SECTION
-const sectionObject = {
-  items: initialCards,
-  renderer: (renderer = () => {
-    const card = new Card(item, "#card-template", handleImageClick());
-    const cardView = card.getView();
-    addItem();
-  }),
-};
+section.renderItems();

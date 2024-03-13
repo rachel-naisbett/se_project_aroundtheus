@@ -19,5 +19,16 @@ export default class Popup {
     }
   };
 
-  setEventListeners = () => {};
+  setEventListeners = () => {
+    this._popupElement.forEach((modal) => {
+      modal.addEventListener("mousedown", (evt) => {
+        if (evt.target.classList.contains("modal_opened")) {
+          this.open(modal);
+        }
+        if (evt.target.classList.contains("modal__close")) {
+          this.close(modal);
+        }
+      });
+    });
+  };
 }

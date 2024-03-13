@@ -7,11 +7,11 @@ export default class Section {
 
   renderItems = () => {
     this._items.forEach((item) => {
-      this._renderer(item);
+      this._renderer();
     });
   };
 
-  addItem = () => {
-    this._cardWrapper.prepend(this.renderer());
+  addItem = (cardView) => {
+    this._cardWrapper.prepend(cardView);
   };
 }
