@@ -46,7 +46,8 @@ const modalInputDescription = document.querySelector(
 );
 
 const cardTitle = document.querySelector(".card__title");
-const cardImage = document.querySelector(".card__image");
+const cardImage = document.querySelector(".modal__cardImage_container");
+
 // EVENT HANDLERS
 
 // profileModalForm.addEventListener("submit", (e) => {
@@ -62,28 +63,12 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileModal);
 });
 
-// // CREATE NEW CARD FUNCTION
-// function getCardElement(cardData) {
-//   return new Card(cardData, "#card-template", handleImageClick).getView();
-// }
-
-function handleImageClick(imageData) {
-  openModal(cardImageModal);
-  cardModalImage.src = this._link;
-  imageModaltext.textContent = this._name;
-  cardModalImage.alt = this._cardImage.alt;
-}
-
-// initialCards.forEach((cardData) => {
-//   cardsWrap.prepend(getCardElement(cardData));
-// });
-
 // CARD IMAGE MODAL
 const cardImageModal = document.querySelector(".cardImage__modal");
 
-// const cardImageCloseButton = document.querySelector(
-//   ".cardImage__imageModalButton"
-// );
+cardImage.addEventListener("click", () => {
+  open();
+});
 
 //FORM VALIDATOR OBJECT
 const config = {
@@ -105,7 +90,14 @@ editFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(cardForm, config);
 cardFormValidator.enableValidation();
 
-// handleFormSubmit FUNCTIONS
+// handleFormSubmit & handleImage FUNCTIONS
+// const handleImageClick = () => {
+//   cardModalImage.src = link;
+//   imageModaltext.textContent = name;
+//   cardModalImage.alt = cardImage.alt;
+//   open();
+// };
+
 const handleAddCardSubmit = () => {
   cardTitle.textContent = cardModalTitle.value;
   cardImage.src = cardModalLink.value;
@@ -126,18 +118,7 @@ const newImagePopup = new PopupWithImage("#imageModal");
 
 newCardPopup.setEventListeners();
 newProfilePopup.setEventListeners();
-newImagePopup.handleImageClick();
-
-// this._popupForm.addEventListener("submit", (e) => {
-//   this.close();
-//   e.preventDefault();
-//   // const cardData = {
-//   //   name: cardModalTitle.value,
-//   //   link: cardModalLink.value,
-//   // };
-//   // cardsWrap.prepend(getCardElement(cardData));
-//   cardModalForm.reset();
-// });
+newImagePopup.open();
 
 //OBJECT FOR NEW CARDS
 
