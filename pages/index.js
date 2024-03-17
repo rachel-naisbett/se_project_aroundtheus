@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 
 const initialCards = [
   {
@@ -31,11 +32,11 @@ const initialCards = [
   },
 ];
 
-const cardModalImage = document.querySelector(".cardImage__modal-image");
-const imageModaltext = document.querySelector(".card__imageModal-text");
+//VARIABLES
+const cardWrapper = document.querySelector(".card-wrapper");
 const cardModalTitle = document.querySelector("#card-modal__input-title");
 const cardModalLink = document.querySelector("#card-modal__input-imagelink");
-const addCardButton = document.querySelector("#cardModal__button");
+const addCardButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__arrow");
 
 const profileName = document.querySelector(".profile__title");
@@ -47,28 +48,8 @@ const modalInputDescription = document.querySelector(
 
 const cardTitle = document.querySelector(".card__title");
 const cardImage = document.querySelector(".modal__cardImage_container");
-
-// EVENT HANDLERS
-
-// profileModalForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   profileName.textContent = modalInputName.value;
-//   profileDescription.textContent = modalInputDescription.value;
-//   closeModal(profileModal);
-// });
-
-profileEditButton.addEventListener("click", () => {
-  modalInputName.value = profileName.textContent;
-  modalInputDescription.value = profileDescription.textContent;
-  openModal(profileModal);
-});
-
-// CARD IMAGE MODAL
-const cardImageModal = document.querySelector(".cardImage__modal");
-
-cardImage.addEventListener("click", () => {
-  open();
-});
+const editForm = document.forms["profileModalForm"];
+const cardForm = document.forms["cardModalForm"];
 
 //FORM VALIDATOR OBJECT
 const config = {
@@ -81,31 +62,46 @@ const config = {
   invalidInputClass: "modal__input-invalid",
 };
 
-const editForm = document.forms["profileModalForm"];
-const cardForm = document.forms["cardModalForm"];
+// EVENT HANDLERS
+addCardButton.addEventListener("click", () => {
+  newCardPopup.open();
+});
 
-const editFormValidator = new FormValidator(editForm, config);
-editFormValidator.enableValidation();
-
-const cardFormValidator = new FormValidator(cardForm, config);
-cardFormValidator.enableValidation();
+profileEditButton.addEventListener("click", () => {
+  newProfilePopup.open();
+  const profileInfo = newUserInfo.getUserInfo();
+  newProfilePopup._getInputValues(profileInfo);
+});
 
 // handleFormSubmit & handleImage FUNCTIONS
-// const handleImageClick = () => {
-//   cardModalImage.src = link;
-//   imageModaltext.textContent = name;
-//   cardModalImage.alt = cardImage.alt;
-//   open();
-// };
+const handleImageClick = (name, link) => {
+  newImagePopup.open(name, link);
+};
 
 const handleAddCardSubmit = () => {
   cardTitle.textContent = cardModalTitle.value;
   cardImage.src = cardModalLink.value;
 };
 
-const handleEditProfileSubmit = () => {
-  profileName.textContent = modalInputName.value;
-  profileDescription.textContent = modalInputDescription.value;
+const handleEditProfileSubmit = (item) => {
+  profileName.textContent = item.name;
+  profileDescription.textContent = item.name;
+};
+
+//OBJECT FOR USERINFO
+const userInfoObject = {
+  userNameSelector: ".profile__title",
+  userJobSelector: ".profile__subheading",
+};
+
+//SECTION OBJECT
+const sectionObject = {
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, "#card-template", handleImageClick);
+    const cardView = card.getView();
+    section.addItem(cardView);
+  },
 };
 
 //CREATE NEW INSTANCE
@@ -115,28 +111,19 @@ const newProfilePopup = new PopupWithForm(
 );
 const newCardPopup = new PopupWithForm("#cardModal", handleAddCardSubmit);
 const newImagePopup = new PopupWithImage("#imageModal");
+const section = new Section(sectionObject, cardWrapper);
+const newUserInfo = new UserInfo(userInfoObject);
+const editFormValidator = new FormValidator(editForm, config);
+const cardFormValidator = new FormValidator(cardForm, config);
 
+//const applyProfileData = newUserInfo.setUserInfo();
+
+//CALLBACKS
+section.renderItems();
 newCardPopup.setEventListeners();
 newProfilePopup.setEventListeners();
-newImagePopup.open();
+newImagePopup.setEventListeners();
+editFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
-//OBJECT FOR NEW CARDS
-
-const newCardData = {
-  name: cardModalTitle.value,
-  link: cardModalLink.value,
-};
-
-//SECTION OBJECT
-const sectionObject = {
-  items: initialCards,
-  renderer: () => {
-    const card = new Card(newCardData, "#card-template", handleImageClick());
-    const cardView = card.getView();
-    section.addItem(cardView);
-  },
-};
-
-const cardWrapper = document.querySelector(".card-wrapper");
-const section = new Section(sectionObject, cardWrapper);
-section.renderItems();
+//newProfilePopup.setEventListeners(applyProfileData);
