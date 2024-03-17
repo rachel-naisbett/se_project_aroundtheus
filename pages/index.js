@@ -83,9 +83,9 @@ const handleAddCardSubmit = () => {
   cardImage.src = cardModalLink.value;
 };
 
-const handleEditProfileSubmit = (item) => {
-  profileName.textContent = item.value;
-  profileDescription.textContent = item.value;
+const handleEditProfileSubmit = (formValues) => {
+  profileName.textContent = formValues.name;
+  profileDescription.textContent = formValues.job;
 };
 
 //OBJECT FOR USERINFO
