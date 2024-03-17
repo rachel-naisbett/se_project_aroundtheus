@@ -84,8 +84,8 @@ const handleAddCardSubmit = () => {
 };
 
 const handleEditProfileSubmit = (item) => {
-  profileName.textContent = item.name;
-  profileDescription.textContent = item.name;
+  profileName.textContent = item.value;
+  profileDescription.textContent = item.value;
 };
 
 //OBJECT FOR USERINFO
