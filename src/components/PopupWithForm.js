@@ -23,13 +23,19 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     this._popupForm.addEventListener("submit", (e) => {
-      this.close();
       this._handleFormSubmit(this._getInputValues());
+      this.close();
     });
     super.setEventListeners();
   }
 
-  _getInputValues(item) {
+  setInputValues(popupInfo) {
+    this._inputList.forEach((item) => {
+      item.value = popupInfo[item.name];
+    });
+  }
+
+  _getInputValues() {
     const formValues = {};
     this._inputList.forEach((item) => {
       formValues[item.name] = item.value;

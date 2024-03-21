@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around the U.S</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="page">
     <div class="page__wrapper">
       <header class="header">
         <img
-          src="./images/icons/header_icon.svg"
+          src="<%=require(./images/icons/header_icon.svg)%>"
           alt="Around-the-us"
           class="header__icon"
         />
@@ -18,7 +17,7 @@
       <main class="page__main">
         <section class="profile">
           <img
-            src="./images/icons/jacques-cousteau.png"
+            src="<%=(./images/icons/jacques-cousteau.png)%>"
             alt="jacques-cousteau"
             class="profile__image"
           />
@@ -92,7 +91,7 @@
             class="modal__input modal_input-invalid"
             id="card-modal__input-title"
             type="text"
-            name="heading"
+            name="name"
             placeholder="Title"
             minlength="1"
             maxlength="30"
@@ -106,7 +105,7 @@
             class="modal__input modal_input-invalid"
             id="card-modal__input-imagelink"
             type="url"
-            name="subheading"
+            name="link"
             placeholder="Image link"
             required
           />
@@ -140,6 +139,5 @@
         </div>
       </li>
     </template>
-    <script src="./pages/index.js" type="module" defer></script>
   </body>
 </html>
