@@ -116,8 +116,6 @@ const newUserInfo = new UserInfo(userInfoObject);
 const editFormValidator = new FormValidator(editForm, config);
 const cardFormValidator = new FormValidator(cardForm, config);
 
-//const applyProfileData = newUserInfo.setUserInfo();
-
 //CALLBACKS
 section.renderItems();
 newCardPopup.setEventListeners();
@@ -125,5 +123,3 @@ newProfilePopup.setEventListeners();
 newImagePopup.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
-
-//newProfilePopup.setEventListeners(applyProfileData);
