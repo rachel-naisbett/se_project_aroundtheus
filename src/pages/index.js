@@ -4,6 +4,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import "../pages/index.css";
 
 const initialCards = [
   {
@@ -34,20 +35,9 @@ const initialCards = [
 
 //VARIABLES
 const cardWrapper = document.querySelector(".card-wrapper");
-const cardModalTitle = document.querySelector("#card-modal__input-title");
-const cardModalLink = document.querySelector("#card-modal__input-imagelink");
 const addCardButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__arrow");
 
-const profileName = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__subheading");
-const modalInputName = document.querySelector("#profileModal__input-name");
-const modalInputDescription = document.querySelector(
-  "#profileModal__input-description"
-);
-
-const cardTitle = document.querySelector(".card__title");
-const cardImage = document.querySelector(".modal__cardImage_container");
 const editForm = document.forms["profileModalForm"];
 const cardForm = document.forms["cardModalForm"];
 
@@ -70,7 +60,7 @@ addCardButton.addEventListener("click", () => {
 profileEditButton.addEventListener("click", () => {
   newProfilePopup.open();
   const profileInfo = newUserInfo.getUserInfo();
-  newProfilePopup._getInputValues(profileInfo);
+  newProfilePopup.setInputValues(profileInfo);
 });
 
 // handleFormSubmit & handleImage FUNCTIONS
@@ -78,14 +68,14 @@ const handleImageClick = (name, link) => {
   newImagePopup.open(name, link);
 };
 
-const handleAddCardSubmit = () => {
-  cardTitle.textContent = cardModalTitle.value;
-  cardImage.src = cardModalLink.value;
+const handleAddCardSubmit = (formValues) => {
+  const card = new Card(formValues, "#card-template", handleImageClick);
+  const cardElement = card.getView();
+  section.addItem(cardElement);
 };
 
 const handleEditProfileSubmit = (formValues) => {
-  profileName.textContent = formValues.name;
-  profileDescription.textContent = formValues.job;
+  newUserInfo.setUserInfo(formValues);
 };
 
 //OBJECT FOR USERINFO
