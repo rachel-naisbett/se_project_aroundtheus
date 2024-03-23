@@ -54,28 +54,27 @@ const config = {
 
 // EVENT HANDLERS
 addCardButton.addEventListener("click", () => {
-  newCardPopup.open();
+  CardPopup.open();
 });
 
 profileEditButton.addEventListener("click", () => {
-  newProfilePopup.open();
-  const profileInfo = newUserInfo.getUserInfo();
-  newProfilePopup.setInputValues(profileInfo);
+  ProfilePopup.open();
+  const profileInfo = UserInfoInstance.getUserInfo();
+  ProfilePopup.setInputValues(profileInfo);
 });
 
 // handleFormSubmit & handleImage FUNCTIONS
 const handleImageClick = (name, link) => {
-  newImagePopup.open(name, link);
+  ImagePopup.open(name, link);
 };
 
-const handleAddCardSubmit = (formValues) => {
-  const card = new Card(formValues, "#card-template", handleImageClick);
-  const cardElement = card.getView();
+const handleAddCardSubmit = (data) => {
+  const cardElement = createCard(data);
   section.addItem(cardElement);
 };
 
 const handleEditProfileSubmit = (formValues) => {
-  newUserInfo.setUserInfo(formValues);
+  UserInfoInstance.setUserInfo(formValues);
 };
 
 //OBJECT FOR USERINFO
@@ -84,32 +83,37 @@ const userInfoObject = {
   userJobSelector: ".profile__subheading",
 };
 
+//NEW CARD
+const createCard = (item) => {
+  const card = new Card(item, "#card-template", handleImageClick);
+  return card.getView();
+};
+
 //SECTION OBJECT
 const sectionObject = {
   items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, "#card-template", handleImageClick);
-    const cardView = card.getView();
-    section.addItem(cardView);
+  renderer: (data) => {
+    const cardElement = createCard(data);
+    section.addItem(cardElement);
   },
 };
 
 //CREATE NEW INSTANCE
-const newProfilePopup = new PopupWithForm(
+const ProfilePopup = new PopupWithForm(
   "#profileModal",
   handleEditProfileSubmit
 );
-const newCardPopup = new PopupWithForm("#cardModal", handleAddCardSubmit);
-const newImagePopup = new PopupWithImage("#imageModal");
+const CardPopup = new PopupWithForm("#cardModal", handleAddCardSubmit);
+const ImagePopup = new PopupWithImage("#imageModal");
 const section = new Section(sectionObject, cardWrapper);
-const newUserInfo = new UserInfo(userInfoObject);
+const UserInfoInstance = new UserInfo(userInfoObject);
 const editFormValidator = new FormValidator(editForm, config);
 const cardFormValidator = new FormValidator(cardForm, config);
 
 //CALLBACKS
 section.renderItems();
-newCardPopup.setEventListeners();
-newProfilePopup.setEventListeners();
-newImagePopup.setEventListeners();
+CardPopup.setEventListeners();
+ProfilePopup.setEventListeners();
+ImagePopup.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();

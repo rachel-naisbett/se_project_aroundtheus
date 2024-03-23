@@ -1,8 +1,8 @@
 export default class Section {
-  constructor({ items, renderer }, cardsWrapper) {
+  constructor({ items, renderer }, Wrapper) {
     this._items = items;
     this._renderer = renderer;
-    this._cardsWrapper = cardsWrapper;
+    this._Wrapper = Wrapper;
   }
 
   renderItems = () => {
@@ -12,6 +12,6 @@ export default class Section {
   };
 
   addItem = (cardElement) => {
-    this._cardsWrapper.prepend(cardElement);
+    this._Wrapper.prepend(cardElement);
   };
 }
