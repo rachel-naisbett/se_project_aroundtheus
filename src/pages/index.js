@@ -54,18 +54,18 @@ const config = {
 
 // EVENT HANDLERS
 addCardButton.addEventListener("click", () => {
-  CardPopup.open();
+  cardPopup.open();
 });
 
 profileEditButton.addEventListener("click", () => {
-  ProfilePopup.open();
-  const profileInfo = UserInfoInstance.getUserInfo();
-  ProfilePopup.setInputValues(profileInfo);
+  profilePopup.open();
+  const profileInfo = userInfoInstance.getUserInfo();
+  profilePopup.setInputValues(profileInfo);
 });
 
 // handleFormSubmit & handleImage FUNCTIONS
 const handleImageClick = (name, link) => {
-  ImagePopup.open(name, link);
+  imagePopup.open(name, link);
 };
 
 const handleAddCardSubmit = (data) => {
@@ -74,7 +74,7 @@ const handleAddCardSubmit = (data) => {
 };
 
 const handleEditProfileSubmit = (formValues) => {
-  UserInfoInstance.setUserInfo(formValues);
+  userInfoInstance.setUserInfo(formValues);
 };
 
 //OBJECT FOR USERINFO
@@ -99,21 +99,21 @@ const sectionObject = {
 };
 
 //CREATE NEW INSTANCE
-const ProfilePopup = new PopupWithForm(
+const profilePopup = new PopupWithForm(
   "#profileModal",
   handleEditProfileSubmit
 );
-const CardPopup = new PopupWithForm("#cardModal", handleAddCardSubmit);
-const ImagePopup = new PopupWithImage("#imageModal");
+const cardPopup = new PopupWithForm("#cardModal", handleAddCardSubmit);
+const imagePopup = new PopupWithImage("#imageModal");
 const section = new Section(sectionObject, cardWrapper);
-const UserInfoInstance = new UserInfo(userInfoObject);
+const userInfoInstance = new UserInfo(userInfoObject);
 const editFormValidator = new FormValidator(editForm, config);
 const cardFormValidator = new FormValidator(cardForm, config);
 
 //CALLBACKS
 section.renderItems();
-CardPopup.setEventListeners();
-ProfilePopup.setEventListeners();
-ImagePopup.setEventListeners();
+cardPopup.setEventListeners();
+profilePopup.setEventListeners();
+imagePopup.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
