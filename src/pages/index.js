@@ -34,12 +34,11 @@ const initialCards = [
 ];
 
 //VARIABLES
-const cardWrapper = document.querySelector(".card-wrapper");
 const addCardButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__arrow");
 
-const editForm = document.forms["profileModalForm"];
-const cardForm = document.forms["cardModalForm"];
+//const editForm = document.forms["profileModalForm"];
+//const cardForm = document.forms["cardModalForm"];
 
 //FORM VALIDATOR OBJECT
 const config = {
