@@ -26,6 +26,5 @@ Project Functionality: This is a responsive design for devices with 320-1280px s
 Project Description: Designed for users to add or like travel pictures.
 Project Techniques: contains Javascript, CSS and HTML.
 
-Github Project Link: https://rachel-naisbett.github.io/se_project_aroundtheus/
-
+Github Project Link: (https://rachel-naisbett.github.io/se_project_aroundtheus/)
 Message to Reviwer: Thank you for taking your time explaining that cool code to combine overlay and close buttons! I'm going to pass along my appreciation to my success manager ;)
