@@ -34,7 +34,7 @@ const initialCards = [
 ];
 
 //VARIABLES
-const cardWrapper = document.querySelectorAll("card-wrapper");
+const cardWrapper = document.querySelector("card-wrapper");
 const addCardButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__arrow");
 
