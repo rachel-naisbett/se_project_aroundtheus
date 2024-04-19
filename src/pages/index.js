@@ -5,39 +5,16 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
-
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
+import { Api } from "../components/API.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 //VARIABLES
-const cardWrapper = document.querySelector("card-wrapper");
+const cardWrapper = document.querySelector(".card-wrapper");
 const addCardButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__arrow");
+const deletePopupButton = document.querySelector("#confirm-delete-button");
 
+const deletePopup = document.querySelector("#deletePopup");
 const editForm = document.forms["profileModalForm"];
 const cardForm = document.forms["cardModalForm"];
 
@@ -69,12 +46,34 @@ const handleImageClick = (name, link) => {
 };
 
 const handleAddCardSubmit = (data) => {
-  const cardElement = createCard(data);
-  section.addItem(cardElement);
+  api
+    .addNewCard(data)
+    .then((result) => {
+      debugger;
+      const cardElement = createCard(result);
+      section.addItem(cardElement);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 const handleEditProfileSubmit = (formValues) => {
+  console.log(formValues);
+  api.editProfileData();
   userInfoInstance.setUserInfo(formValues);
+};
+
+// this runs when you click the delete button on a card
+const handleDeleteClick = (card) => {
+  // this runs when you click the yes button in the confirmation modal
+  const handleDeleteCard = () => {
+    api.deleteCard(card._id).then(() => {
+      card.deleteCard();
+    });
+    popupDelete.open();
+    popupDelete.setSubmitHandler(handleDeleteCard);
+  };
 };
 
 //OBJECT FOR USERINFO
@@ -85,13 +84,17 @@ const userInfoObject = {
 
 //NEW CARD
 const createCard = (item) => {
-  const card = new Card(item, "#card-template", handleImageClick);
+  const card = new Card(
+    item,
+    "#card-template",
+    handleImageClick,
+    handleDeleteClick
+  );
   return card.getView();
 };
 
 //SECTION OBJECT
 const sectionObject = {
-  items: initialCards,
   renderer: (data) => {
     const cardElement = createCard(data);
     section.addItem(cardElement);
@@ -109,11 +112,49 @@ const section = new Section(sectionObject, cardWrapper);
 const userInfoInstance = new UserInfo(userInfoObject);
 const editFormValidator = new FormValidator(editForm, config);
 const cardFormValidator = new FormValidator(cardForm, config);
+const popupDelete = new PopupWithConfirmation("#deletePopup");
 
 //CALLBACKS
-section.renderItems();
+//section.renderItems();
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
 imagePopup.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
+popupDelete.setEventListeners();
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "14d5451e-ea68-4211-8036-23527b03c3ac",
+    "Content-Type": "application/json",
+  },
+});
+
+//API CALLBACKS
+api
+  .getInitialCards()
+  .then((result) => {
+    section.renderItems(result);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+api
+  .getUserInfo()
+  .then((result) => {
+    userInfoInstance.setUserInfo(result);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// api
+//   .editProfileData()
+//   .then((result) => {
+//     profilePopup.setInputValues(result);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });

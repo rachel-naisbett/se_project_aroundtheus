@@ -1,9 +1,16 @@
 export default class Card {
-  constructor({ name, link }, cardSelector, handleImageClick) {
+  constructor(
+    { name, link, _id },
+    cardSelector,
+    handleImageClick,
+    handleDeleteClick
+  ) {
     this._name = name;
     this._link = link;
+    this._id = _id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   //DECONSTRUCTING SETEVENTLISTENERS
@@ -16,17 +23,18 @@ export default class Card {
     this._likeButton.addEventListener("click", this._toggleLike);
 
     //DELETE BUTTON
-    this._deleteButton.addEventListener("click", this._deleteCard);
+    this._deleteButton.addEventListener("click", () =>
+      this._handleDeleteClick(this)
+    );
     //IMAGE BUTTON
     this._cardImage.addEventListener("click", () => {
       this._handleImageClick(this._name, this._link);
     });
   }
 
-  _deleteCard = (e) => {
+  deleteCard() {
     this._cardElement.remove();
-    this._cardElement = null;
-  };
+  }
 
   getView() {
     this._cardElement = document
