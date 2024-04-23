@@ -12,9 +12,7 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 const cardWrapper = document.querySelector(".card-wrapper");
 const addCardButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__arrow");
-const deletePopupButton = document.querySelector("#confirm-delete-button");
 
-const deletePopup = document.querySelector("#deletePopup");
 const editForm = document.forms["profileModalForm"];
 const cardForm = document.forms["cardModalForm"];
 
@@ -37,7 +35,10 @@ addCardButton.addEventListener("click", () => {
 profileEditButton.addEventListener("click", () => {
   profilePopup.open();
   const profileInfo = userInfoInstance.getUserInfo();
-  profilePopup.setInputValues(profileInfo);
+  profilePopup.setInputValues({
+    name: profileInfo.name,
+    job: profileInfo.about,
+  });
 });
 
 // handleFormSubmit & handleImage FUNCTIONS
@@ -49,7 +50,6 @@ const handleAddCardSubmit = (data) => {
   api
     .addNewCard(data)
     .then((result) => {
-      debugger;
       const cardElement = createCard(result);
       section.addItem(cardElement);
     })
@@ -59,7 +59,6 @@ const handleAddCardSubmit = (data) => {
 };
 
 const handleEditProfileSubmit = (formValues) => {
-  console.log(formValues);
   api.editProfileData();
   userInfoInstance.setUserInfo(formValues);
 };
@@ -71,9 +70,21 @@ const handleDeleteClick = (card) => {
     api.deleteCard(card._id).then(() => {
       card.deleteCard();
     });
-    popupDelete.open();
-    popupDelete.setSubmitHandler(handleDeleteCard);
   };
+  popupDelete.open();
+  popupDelete.setSubmitHandler(handleDeleteCard);
+};
+
+const handleLikeClick = (id, card) => {
+  api.likeCard(id).then(() => {
+    card.like();
+  });
+};
+
+const handleDislikeClick = (id, card) => {
+  api.deleteLike(id).then(() => {
+    card.dislike();
+  });
 };
 
 //OBJECT FOR USERINFO
@@ -88,7 +99,9 @@ const createCard = (item) => {
     item,
     "#card-template",
     handleImageClick,
-    handleDeleteClick
+    handleDeleteClick,
+    handleLikeClick,
+    handleDislikeClick
   );
   return card.getView();
 };
@@ -115,7 +128,6 @@ const cardFormValidator = new FormValidator(cardForm, config);
 const popupDelete = new PopupWithConfirmation("#deletePopup");
 
 //CALLBACKS
-//section.renderItems();
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
 imagePopup.setEventListeners();
@@ -149,12 +161,3 @@ api
   .catch((err) => {
     console.error(err);
   });
-
-// api
-//   .editProfileData()
-//   .then((result) => {
-//     profilePopup.setInputValues(result);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });

@@ -3,8 +3,7 @@ export class Api {
     // constructor body
   }
 
-  ///TURN THIS INTO A FUNCTION FOR ALL METHODS
-  checkResponse(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
@@ -16,14 +15,14 @@ export class Api {
       headers: {
         authorization: "14d5451e-ea68-4211-8036-23527b03c3ac",
       },
-    }).then(this.checkResponse);
+    }).then(this._checkResponse);
   }
   getUserInfo() {
     return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
       headers: {
         authorization: "14d5451e-ea68-4211-8036-23527b03c3ac",
       },
-    }).then(this.jsonMethods);
+    }).then(this._checkResponse);
   }
 
   editProfileData() {
@@ -37,7 +36,7 @@ export class Api {
         name: "Rachel Naisbett",
         about: "Explorer",
       }),
-    }).then(this.checkResponse);
+    }).then(this._checkResponse);
   }
 
   addNewCard(data) {
@@ -51,7 +50,7 @@ export class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then(this.checkResponse);
+    }).then(this._checkResponse);
   }
 
   deleteCard(id) {
@@ -64,30 +63,32 @@ export class Api {
           "Content-Type": "application/json",
         },
       }
-    ).then(this.checkResponse);
+    ).then(this._checkResponse);
   }
 
-  likeCard() {
-    return PUT(
-      "https://around-api.en.tripleten-services.com/v1/cards/cardId/likes",
+  likeCard(id) {
+    return fetch(
+      `https://around-api.en.tripleten-services.com/v1/cards/${id}/likes`,
       {
+        method: "PUT",
         headers: {
           authorization: "14d5451e-ea68-4211-8036-23527b03c3ac",
           "Content-Type": "application/json",
         },
       }
-    ).then(this.checkResponse);
+    ).then(this._checkResponse);
   }
 
-  deleteLike() {
-    return DELETE(
-      "https://around-api.en.tripleten-services.com/v1/cards/cardId/likes",
+  deleteLike(id) {
+    return fetch(
+      `https://around-api.en.tripleten-services.com/v1/cards/${id}/likes`,
       {
+        method: "DELETE",
         headers: {
           authorization: "14d5451e-ea68-4211-8036-23527b03c3ac",
           "Content-Type": "application/json",
         },
       }
-    ).then(this.checkResponse);
+    ).then(this._checkResponse);
   }
 }
