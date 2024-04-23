@@ -12,9 +12,11 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 const cardWrapper = document.querySelector(".card-wrapper");
 const addCardButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__arrow");
+const profileAvatarButton = document.querySelector(".profile__image-button");
 
 const editForm = document.forms["profileModalForm"];
 const cardForm = document.forms["cardModalForm"];
+const avatarForm = document.forms["avatarForm"];
 
 //FORM VALIDATOR OBJECT
 const config = {
@@ -28,6 +30,10 @@ const config = {
 };
 
 // EVENT HANDLERS
+profileAvatarButton.addEventListener("click", () => {
+  avatarPopup.open();
+});
+
 addCardButton.addEventListener("click", () => {
   cardPopup.open();
 });
@@ -52,6 +58,7 @@ const handleAddCardSubmit = (data) => {
     .then((result) => {
       const cardElement = createCard(result);
       section.addItem(cardElement);
+      cardFormValidator.disableButton();
     })
     .catch((err) => {
       console.error(err);
@@ -121,18 +128,22 @@ const profilePopup = new PopupWithForm(
 );
 const cardPopup = new PopupWithForm("#cardModal", handleAddCardSubmit);
 const imagePopup = new PopupWithImage("#imageModal");
+const avatarPopup = new PopupWithForm("#avatarModal");
 const section = new Section(sectionObject, cardWrapper);
 const userInfoInstance = new UserInfo(userInfoObject);
 const editFormValidator = new FormValidator(editForm, config);
 const cardFormValidator = new FormValidator(cardForm, config);
 const popupDelete = new PopupWithConfirmation("#deletePopup");
+const avatarFormValidator = new FormValidator(avatarForm, config);
 
 //CALLBACKS
+avatarPopup.setEventListeners();
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
 imagePopup.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 popupDelete.setEventListeners();
 
 const api = new Api({

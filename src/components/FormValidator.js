@@ -54,6 +54,11 @@ export default class FormValidator {
     }
   }
 
+  disableButton() {
+    this._submitButton.classList.add(this._inactiveButtonClass);
+    this._submitButton.disabled = true;
+  }
+
   _checkFormValidity() {
     return this._inputElements.some((inputElement) => {
       return !inputElement.validity.valid;
