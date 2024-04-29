@@ -12,7 +12,10 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 const cardWrapper = document.querySelector(".card-wrapper");
 const addCardButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__arrow");
-const profileAvatarButton = document.querySelector(".profile__image-button");
+const profileAvatarButton = document.querySelector("#profile__imageButton");
+const profileModalButton = document.querySelector("#profileModal__button");
+const cardModalButton = document.querySelector("#cardModal__button");
+const avatarModalButton = document.querySelector("#avatarModal__button");
 
 const editForm = document.forms["profileModalForm"];
 const cardForm = document.forms["cardModalForm"];
@@ -43,7 +46,7 @@ profileEditButton.addEventListener("click", () => {
   const profileInfo = userInfoInstance.getUserInfo();
   profilePopup.setInputValues({
     name: profileInfo.name,
-    job: profileInfo.about,
+    about: profileInfo.about,
   });
 });
 
@@ -53,9 +56,11 @@ const handleImageClick = (name, link) => {
 };
 
 const handleAddCardSubmit = (data) => {
+  cardModalButton.textContent = "Saving...";
   api
     .addNewCard(data)
     .then((result) => {
+      cardModalButton.textContent = "Save";
       const cardElement = createCard(result);
       section.addItem(cardElement);
       cardFormValidator.disableButton();
@@ -66,8 +71,18 @@ const handleAddCardSubmit = (data) => {
 };
 
 const handleEditProfileSubmit = (formValues) => {
-  api.editProfileData();
+  profileModalButton.textContent = "Saving...";
+  api.editProfileData().then((data) => {
+    profileModalButton.textContent = "Save";
+  });
   userInfoInstance.setUserInfo(formValues);
+};
+
+const handleAvatarSubmit = (link) => {
+  avatarModalButton.textContent = "Saving...";
+  api.editAvatar(link).then((data) => {
+    avatarModalButton.textContent = "Save";
+  });
 };
 
 // this runs when you click the delete button on a card
@@ -128,7 +143,7 @@ const profilePopup = new PopupWithForm(
 );
 const cardPopup = new PopupWithForm("#cardModal", handleAddCardSubmit);
 const imagePopup = new PopupWithImage("#imageModal");
-const avatarPopup = new PopupWithForm("#avatarModal");
+const avatarPopup = new PopupWithForm("#avatarModal", handleAvatarSubmit);
 const section = new Section(sectionObject, cardWrapper);
 const userInfoInstance = new UserInfo(userInfoObject);
 const editFormValidator = new FormValidator(editForm, config);

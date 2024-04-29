@@ -16,13 +16,18 @@
       </header>
       <main class="page__main">
         <section class="profile">
-          <button class="profile__image-button">
+          <div class="profile__avatar-container">
             <img
               src="<%=require('./images/icons/jacques-cousteau.png')%>"
               alt="jacques-cousteau"
               class="profile__image"
             />
-          </button>
+            <button
+              class="profile__image-button"
+              id="profile__imageButton"
+              type="button"
+            ></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button class="profile__arrow" type="button"></button>
@@ -159,11 +164,11 @@
             placeholder="Avatar link"
             required
           />
-          <button
-            class="modal__button"
-            id="confirm-delete-button"
-            type="submit"
-          >
+          <span
+            class="modal__input-error"
+            id="avatarModal__errorMessage"
+          ></span>
+          <button class="modal__button" id="avatarModal__button" type="submit">
             Save
           </button>
         </form>

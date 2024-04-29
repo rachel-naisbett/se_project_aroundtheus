@@ -13,6 +13,15 @@
   grid-template-columns: auto 1fr;
   position: relative;
 }
+
+.profile__avatar-container {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .profile__image {
   border-radius: 50%;
   width: 120px;
@@ -20,21 +29,25 @@
 }
 
 .profile__image-button {
-  cursor: pointer;
   background-color: transparent;
   box-sizing: content-box;
   border: none;
+  border-radius: 50%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
-.profile__image-button:hover {
+.profile__avatar-container:hover .profile__image-button {
   opacity: 0.6;
-  background-image: url(../images/icons/arrow.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  background-size: contain;
+  box-sizing: content-box;
+  background: url(../images/icons/arrow.svg) center no-repeat;
+  background-size: 35px;
+
+  visibility: visible;
+
+  background-color: black;
+  transition: visibility 0.3s linear 0.5s, opacity 0.3s linear;
 }
 
 .profile__title {

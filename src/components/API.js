@@ -91,4 +91,20 @@ export class Api {
       }
     ).then(this._checkResponse);
   }
+
+  editAvatar(data) {
+    return fetch(
+      "https://around-api.en.tripleten-services.com/v1/users/me/avatar",
+      {
+        method: "PATCH",
+        headers: {
+          authorization: "14d5451e-ea68-4211-8036-23527b03c3ac",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          avatar: data.avatar,
+        }),
+      }
+    ).then(this._checkResponse);
+  }
 }
