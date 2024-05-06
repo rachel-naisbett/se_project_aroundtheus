@@ -15,7 +15,6 @@
 }
 
 .profile__avatar-container {
-  cursor: pointer;
   position: relative;
   display: flex;
   justify-content: center;
@@ -39,6 +38,7 @@
 }
 
 .profile__avatar-container:hover .profile__image-button {
+  cursor: pointer;
   opacity: 0.6;
   box-sizing: content-box;
   background: url(../images/icons/arrow.svg) center no-repeat;

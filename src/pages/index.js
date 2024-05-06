@@ -80,8 +80,9 @@ const handleEditProfileSubmit = (formValues) => {
 
 const handleAvatarSubmit = (link) => {
   avatarModalButton.textContent = "Saving...";
-  api.editAvatar(link).then((data) => {
+  api.editAvatar(link).then((avatar) => {
     avatarModalButton.textContent = "Save";
+    userInfoInstance.setAvatarUrl(avatar);
   });
 };
 
@@ -113,6 +114,7 @@ const handleDislikeClick = (id, card) => {
 const userInfoObject = {
   userNameSelector: ".profile__title",
   userJobSelector: ".profile__subheading",
+  userAvatarSelector: ".profile__image",
 };
 
 //NEW CARD
