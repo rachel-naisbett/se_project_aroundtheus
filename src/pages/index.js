@@ -185,6 +185,7 @@ api
   .getUserInfo()
   .then((result) => {
     userInfoInstance.setUserInfo(result);
+    userInfoInstance.setAvatarUrl(result);
   })
   .catch((err) => {
     console.error(err);
