@@ -22,14 +22,14 @@ export class Api {
     }).then(this._checkResponse);
   }
 
-  editProfileData() {
-    return fetch(`${this._baseUrl}users/me`, {
+  editProfileData(data) {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
 
       body: JSON.stringify({
-        name: "Rachel Naisbett",
-        about: "Explorer",
+        name: data.name,
+        about: data.about,
       }),
     }).then(this._checkResponse);
   }

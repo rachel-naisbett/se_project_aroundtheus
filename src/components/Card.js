@@ -68,9 +68,7 @@ export default class Card {
 
   like() {
     this._isLiked = !this._isLiked;
-    this._cardElement
-      .querySelector(".card__icon")
-      .classList.add("card__icon-button_active");
+    this.renderLike();
   }
   dislike() {
     this._isLiked = !this._isLiked;

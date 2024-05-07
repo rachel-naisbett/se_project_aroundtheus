@@ -72,10 +72,10 @@ const handleAddCardSubmit = (data) => {
 
 const handleEditProfileSubmit = (formValues) => {
   profileModalButton.textContent = "Saving...";
-  api.editProfileData().then((data) => {
+  api.editProfileData(formValues).then((formvalues) => {
     profileModalButton.textContent = "Save";
+    userInfoInstance.setUserInfo(formValues);
   });
-  userInfoInstance.setUserInfo(formValues);
 };
 
 const handleAvatarSubmit = (link) => {
