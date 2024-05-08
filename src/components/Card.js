@@ -72,14 +72,10 @@ export default class Card {
   }
   dislike() {
     this._isLiked = !this._isLiked;
-    this._cardElement
-      .querySelector(".card__icon")
-      .classList.remove("card__icon-button_active");
+    this._likeButton.classList.remove("card__icon-button_active");
   }
 
   renderLike() {
-    this._cardElement
-      .querySelector(".card__icon")
-      .classList.add("card__icon-button_active");
+    this._likeButton.classList.add("card__icon-button_active");
   }
 }

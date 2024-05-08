@@ -120,15 +120,25 @@ const handleDeleteClick = (card) => {
 };
 
 const handleLikeClick = (id, card) => {
-  api.likeCard(id).then(() => {
-    card.like();
-  });
+  api
+    .likeCard(id)
+    .then(() => {
+      card.like();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 const handleDislikeClick = (id, card) => {
-  api.deleteLike(id).then(() => {
-    card.dislike();
-  });
+  api
+    .deleteLike(id)
+    .then(() => {
+      card.dislike();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 //NEW CARD
