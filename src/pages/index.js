@@ -7,6 +7,8 @@ import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 import { Api } from "../components/API.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
+import { userInfoObject } from "../components/utils/constants.js";
+import { config } from "../components/utils/constants.js";
 
 //VARIABLES
 const cardWrapper = document.querySelector(".card-wrapper");
@@ -20,17 +22,6 @@ const avatarModalButton = document.querySelector("#avatarModal__button");
 const editForm = document.forms["profileModalForm"];
 const cardForm = document.forms["cardModalForm"];
 const avatarForm = document.forms["avatarForm"];
-
-//FORM VALIDATOR OBJECT
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: ".modal__input-error",
-  errorClass: ".modal__input-error_active",
-  invalidInputClass: "modal__input-invalid",
-};
 
 // EVENT HANDLERS
 profileAvatarButton.addEventListener("click", () => {
@@ -60,6 +51,7 @@ const handleAddCardSubmit = (data) => {
   api
     .addNewCard(data)
     .then((result) => {
+      cardPopup.close();
       cardModalButton.textContent = "Save";
       const cardElement = createCard(result);
       section.addItem(cardElement);
@@ -67,32 +59,61 @@ const handleAddCardSubmit = (data) => {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      cardModalButton.textContent = "Save";
     });
 };
 
 const handleEditProfileSubmit = (formValues) => {
   profileModalButton.textContent = "Saving...";
-  api.editProfileData(formValues).then((formvalues) => {
-    profileModalButton.textContent = "Save";
-    userInfoInstance.setUserInfo(formValues);
-  });
+  api
+    .editProfileData(formValues)
+    .then((formvalues) => {
+      profilePopup.close();
+      profileModalButton.textContent = "Save";
+      userInfoInstance.setUserInfo(formValues);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      cardModalButton.textContent = "Save";
+    });
 };
 
 const handleAvatarSubmit = (link) => {
   avatarModalButton.textContent = "Saving...";
-  api.editAvatar(link).then((avatar) => {
-    avatarModalButton.textContent = "Save";
-    userInfoInstance.setAvatarUrl(avatar);
-  });
+  api
+    .editAvatar(link)
+    .then((avatar) => {
+      avatarPopup.close();
+      avatarModalButton.textContent = "Save";
+      userInfoInstance.setAvatarUrl(avatar);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      cardModalButton.textContent = "Save";
+    });
 };
 
 // this runs when you click the delete button on a card
 const handleDeleteClick = (card) => {
   // this runs when you click the yes button in the confirmation modal
   const handleDeleteCard = () => {
-    api.deleteCard(card._id).then(() => {
-      card.deleteCard();
-    });
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        card.deleteCard();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
   popupDelete.open();
   popupDelete.setSubmitHandler(handleDeleteCard);
@@ -108,13 +129,6 @@ const handleDislikeClick = (id, card) => {
   api.deleteLike(id).then(() => {
     card.dislike();
   });
-};
-
-//OBJECT FOR USERINFO
-const userInfoObject = {
-  userNameSelector: ".profile__title",
-  userJobSelector: ".profile__subheading",
-  userAvatarSelector: ".profile__image",
 };
 
 //NEW CARD
@@ -169,6 +183,7 @@ const api = new Api({
     authorization: "14d5451e-ea68-4211-8036-23527b03c3ac",
     "Content-Type": "application/json",
   },
+  //catchError:
 });
 
 //API CALLBACKS
