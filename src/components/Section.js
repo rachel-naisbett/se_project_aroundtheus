@@ -11,8 +11,6 @@ export default class Section {
   };
 
   addItem = (cardElement) => {
-    // console.log(2);
-    // console.log(this._wrapper);
     this._wrapper.prepend(cardElement);
   };
 }

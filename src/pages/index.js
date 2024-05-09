@@ -52,13 +52,9 @@ const handleAddCardSubmit = (data) => {
     .addNewCard(data)
     .then((result) => {
       cardPopup.close();
-      cardModalButton.textContent = "Save";
       const cardElement = createCard(result);
       section.addItem(cardElement);
       cardFormValidator.disableButton();
-    })
-    .catch((err) => {
-      console.error(err);
     })
     .catch((err) => {
       console.error(err);
@@ -74,7 +70,6 @@ const handleEditProfileSubmit = (formValues) => {
     .editProfileData(formValues)
     .then((formvalues) => {
       profilePopup.close();
-      profileModalButton.textContent = "Save";
       userInfoInstance.setUserInfo(formValues);
     })
     .catch((err) => {
@@ -91,7 +86,6 @@ const handleAvatarSubmit = (link) => {
     .editAvatar(link)
     .then((avatar) => {
       avatarPopup.close();
-      avatarModalButton.textContent = "Save";
       userInfoInstance.setAvatarUrl(avatar);
     })
     .catch((err) => {
@@ -105,17 +99,19 @@ const handleAvatarSubmit = (link) => {
 // this runs when you click the delete button on a card
 const handleDeleteClick = (card) => {
   // this runs when you click the yes button in the confirmation modal
+  popupDelete.open();
   const handleDeleteCard = () => {
     api
       .deleteCard(card._id)
       .then(() => {
+        popupDelete.close();
         card.deleteCard();
       })
       .catch((err) => {
         console.error(err);
       });
   };
-  popupDelete.open();
+
   popupDelete.setSubmitHandler(handleDeleteCard);
 };
 
