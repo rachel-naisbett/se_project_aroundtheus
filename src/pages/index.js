@@ -76,7 +76,7 @@ const handleEditProfileSubmit = (formValues) => {
       console.error(err);
     })
     .finally(() => {
-      cardModalButton.textContent = "Save";
+      profileModalButton.textContent = "Save";
     });
 };
 
@@ -92,7 +92,7 @@ const handleAvatarSubmit = (link) => {
       console.error(err);
     })
     .finally(() => {
-      cardModalButton.textContent = "Save";
+      avatarModalButton.textContent = "Save";
     });
 };
 
